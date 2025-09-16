@@ -31,7 +31,7 @@ const Hero = () => {
   };
   
   return (
-    <section id="home" className="relative h-screen bg-black overflow-hidden flex items-center justify-center">
+    <section id="home" className="relative h-screen bg-black overflow-hidden flex items-center justify-center pt-20 lg:pt-0">
       {/* Liquid Background */}
       <div className="absolute inset-0 z-0">
         <LiquidEther
