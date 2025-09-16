@@ -144,7 +144,7 @@ const Header = () => {
                               </a>
                             );
                           })}
-                        </GlassBox>
+                        </div>
                       </div>
                     )}
                   </>
