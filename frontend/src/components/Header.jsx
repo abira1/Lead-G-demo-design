@@ -122,11 +122,10 @@ const Header = () => {
     }`}>
       {/* Glass Card Navigation */}
       <GlassBox 
-        className="container mx-auto max-w-6xl px-6 lg:px-8 transition-all duration-400"
+        className="container mx-auto max-w-6xl px-6 lg:px-8 transition-all duration-400 relative z-40"
         blur={isScrolled ? 16 : 12}
         opacity={isScrolled ? 0.15 : 0.1}
         border={true}
-        style={{ position: 'relative', zIndex: 40 }}
       >
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
