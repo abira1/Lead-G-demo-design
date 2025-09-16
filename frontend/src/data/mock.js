@@ -155,36 +155,68 @@ export const caseStudiesData = [
     title: "Solar Company Scales to $10M Revenue",
     industry: "Solar Energy",
     result: "250% increase in qualified leads",
-    description: "How we helped a regional solar company expand nationwide through strategic telemarketing and digital campaigns.",
+    description: "How we helped a regional solar company expand nationwide through strategic telemarketing and digital campaigns. Starting with 50 leads per month, we scaled their operation to become a national player.",
+    challenge: "Limited market reach and low-quality leads from online sources",
+    solution: "Implemented multi-channel approach combining telemarketing, social media, and targeted content marketing",
+    timeline: "18 months",
     metrics: {
       leads: "2,500+ qualified leads/month",
       conversion: "28% conversion rate",
-      revenue: "$10M annual revenue"
-    }
+      revenue: "$10M annual revenue",
+      roi: "450% ROI"
+    },
+    testimonial: "Lead G transformed our business completely. We went from a regional player to national leader in solar installations."
   },
   {
     id: 2,
     title: "Real Estate Firm Doubles Listings",
     industry: "Real Estate",
     result: "120% increase in property listings",
-    description: "Transforming a traditional real estate firm's lead generation with modern outbound strategies.",
+    description: "Transforming a traditional real estate firm's lead generation with modern outbound strategies. Helped them transition from referral-only business to systematic lead generation.",
+    challenge: "Heavy dependence on referrals and lack of consistent lead flow",
+    solution: "Developed comprehensive telemarketing campaigns targeting property owners and investors",
+    timeline: "12 months",
     metrics: {
       leads: "800+ qualified leads/month",
       conversion: "32% conversion rate",
-      revenue: "$3.2M in commissions"
-    }
+      revenue: "$3.2M in commissions",
+      roi: "380% ROI"
+    },
+    testimonial: "The systematic approach Lead G provided gave us predictable growth for the first time in our 15-year history."
   },
   {
     id: 3,
     title: "Government Contractor Wins $5M Deal",
     industry: "Government",
     result: "$5M contract secured",
-    description: "Strategic government contracting support that resulted in the largest contract win in company history.",
+    description: "Strategic government contracting support that resulted in the largest contract win in company history. We provided end-to-end support from opportunity identification to contract award.",
+    challenge: "Complex federal procurement process and lack of past performance",
+    solution: "Comprehensive proposal development, compliance support, and strategic partnership facilitation",
+    timeline: "8 months",
     metrics: {
       proposals: "15 successful bids",
       conversion: "75% bid success rate",
-      revenue: "$5M contract value"
-    }
+      revenue: "$5M contract value",
+      roi: "1000% ROI"
+    },
+    testimonial: "Lead G's government contracting expertise opened doors we never thought possible. The $5M contract changed our entire business trajectory."
+  },
+  {
+    id: 4,
+    title: "Hard Money Lender Achieves Record Growth",
+    industry: "Hard Money Lending",
+    result: "300% increase in loan applications",
+    description: "Helped a private lending firm expand their borrower network and increase deal flow through targeted outreach campaigns.",
+    challenge: "Limited borrower pipeline and dependence on broker relationships",
+    solution: "Direct borrower outreach campaigns combined with investor education programs",
+    timeline: "10 months",
+    metrics: {
+      applications: "$25M in loan applications",
+      conversion: "45% approval rate",
+      revenue: "$2.5M in origination fees",
+      roi: "520% ROI"
+    },
+    testimonial: "Our loan volume increased 300% in less than a year. Lead G's understanding of our industry was exceptional."
   }
 ];
 
