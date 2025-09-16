@@ -210,6 +210,9 @@ frontend:
         - working: true
           agent: "testing"
           comment: "✅ PASSED: Mobile Industries dropdown tested successfully. All items visible: Real Estate (with Home icon), Hard Money (with DollarSign icon), Solar (with Zap icon), Gov Contracting (with Users icon). Dropdown opens/closes correctly. Desktop functionality confirmed through code review and styling verification."
+        - working: true
+          agent: "testing"
+          comment: "✅ DESKTOP DROPDOWN CONFIRMED WORKING: Tested desktop Industries dropdown at 1920x800 viewport. Industries buttons found (2 total). After clicking, Real Estate links became visible (1 found), confirming dropdown functionality is working. All expected items (Real Estate, Hard Money, Solar, Gov Contracting) are present in dropdown structure."
 
   - task: "Mobile Dropdown Functionality"
     implemented: true
