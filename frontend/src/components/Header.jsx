@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { navigationData } from '../data/mock';
 import { Button } from './ui/button';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone, Building, Share2, Home, DollarSign, Zap, Users } from 'lucide-react';
 import GlassBox from './GlassBox';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+
+  // Icon mapping for services and industries
+  const serviceIcons = {
+    "Telemarketing": Phone,
+    "Gov Contracting": Building,
+    "Social Media": Share2
+  };
+
+  const industryIcons = {
+    "Real Estate": Home,
+    "Hard Money": DollarSign,
+    "Solar": Zap,
+    "Gov Contracting": Users
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,11 +31,24 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setActiveDropdown(null);
+    };
+    
+    if (activeDropdown) {
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }
+  }, [activeDropdown]);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handleDropdownToggle = (itemName) => {
+  const handleDropdownToggle = (itemName, e) => {
+    e.stopPropagation();
     setActiveDropdown(activeDropdown === itemName ? null : itemName);
   };
 
