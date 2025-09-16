@@ -11,31 +11,30 @@ export const heroData = {
 export const navigationData = {
   logo: "Lead G",
   menuItems: [
-    { name: "Home", href: "#home" },
+    { name: "Home", href: "/" },
     { 
       name: "Services", 
-      href: "#services",
+      href: "/#services",
       dropdown: [
-        { name: "Telemarketing", href: "#telemarketing" },
-        { name: "Gov Contracting", href: "#government" },
-        { name: "Social Media", href: "#social-media" }
+        { name: "Telemarketing", href: "/#services" },
+        { name: "Gov Contracting", href: "/#services" },
+        { name: "Social Media", href: "/#services" }
       ]
     },
     { 
       name: "Industries", 
-      href: "#industries",
+      href: "/#industries",
       dropdown: [
-        { name: "Real Estate", href: "#real-estate" },
-        { name: "Hard Money", href: "#hard-money" },
-        { name: "Solar", href: "#solar" },
-        { name: "Gov Contracting", href: "#gov-contracting" }
+        { name: "Real Estate", href: "/#industries" },
+        { name: "Hard Money", href: "/#industries" },
+        { name: "Solar", href: "/#industries" },
+        { name: "Gov Contracting", href: "/#industries" }
       ]
     },
-    { name: "Pricing", href: "#pricing" },
-    { name: "Case Studies", href: "#case-studies" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
-    { name: "News/Blog", href: "#news" }
+    { name: "Pricing", href: "/#pricing" },
+    { name: "Case Studies", href: "/#case-studies" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" }
   ]
 };
 
