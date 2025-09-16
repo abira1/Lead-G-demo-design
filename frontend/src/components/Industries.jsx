@@ -31,7 +31,12 @@ const Industries = () => {
             
             return (
               <ScrollReveal key={index} delay={0.1 * (index + 1)}>
-                <GlassBox className="group p-6 hover:scale-[1.05] transition-all duration-500">
+                <GlassBox 
+                  className="group p-6 cursor-pointer"
+                  hover={true}
+                  hoverScale={1.08}
+                  glow={true}
+                >
                   
                   {/* Industry Icon */}
                   <div className="mb-6">
