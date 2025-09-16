@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the dropdown functionality in the navbar of the Lead G website including Services dropdown, Industries dropdown, mobile dropdown functionality, styling verification, and hover effects."
+user_problem_statement: "Test the complete Lead G website with all new sections and responsiveness including homepage sections, new pages (/about, /contact, /privacy-policy, /terms-of-service), navigation testing, content verification, responsiveness testing across devices, and form testing."
 
 backend:
   - task: "Root API Endpoint"
