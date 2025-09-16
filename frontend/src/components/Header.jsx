@@ -75,36 +75,50 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navigationData.menuItems.slice(0, 6).map((item) => (
-              <div key={item.name} className="relative group">
+              <div key={item.name} className="relative">
                 {item.dropdown ? (
-                  <div className="relative">
+                  <>
                     <button
-                      className="flex items-center space-x-1 text-white/70 hover:text-white transition-colors duration-300 py-2 px-4 rounded-none hover:bg-white/5"
-                      onClick={() => handleDropdownToggle(item.name)}
+                      className="flex items-center space-x-1 text-white/70 hover:text-white transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/5"
+                      onClick={(e) => handleDropdownToggle(item.name, e)}
                     >
                       <span className="text-sm font-medium">{item.name}</span>
-                      <ChevronDown className="w-3 h-3" />
+                      <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
+                        activeDropdown === item.name ? 'rotate-180' : ''
+                      }`} />
                     </button>
                     {activeDropdown === item.name && (
-                      <div className="absolute top-full left-0 mt-2 w-48">
-                        <GlassBox className="py-2">
-                          {item.dropdown.map((subItem) => (
-                            <a
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="block px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 transition-all duration-300 text-sm font-medium"
-                            >
-                              {subItem.name}
-                            </a>
-                          ))}
+                      <div className="absolute top-full left-0 mt-2 w-56 z-50">
+                        <GlassBox 
+                          className="py-2 shadow-xl"
+                          blur={16}
+                          opacity={0.2}
+                          border={true}
+                        >
+                          {item.dropdown.map((subItem, index) => {
+                            const IconComponent = item.name === 'Services' ? serviceIcons[subItem.name] : industryIcons[subItem.name];
+                            return (
+                              <a
+                                key={subItem.name}
+                                href={subItem.href}
+                                className="flex items-center space-x-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 text-sm font-medium group"
+                                onClick={() => setActiveDropdown(null)}
+                              >
+                                {IconComponent && (
+                                  <IconComponent className="w-4 h-4 text-[#00FFD1] group-hover:scale-110 transition-transform duration-200" />
+                                )}
+                                <span>{subItem.name}</span>
+                              </a>
+                            );
+                          })}
                         </GlassBox>
                       </div>
                     )}
-                  </div>
+                  </>
                 ) : (
                   <a
                     href={item.href}
-                    className="text-white/70 hover:text-white transition-colors duration-300 text-sm font-medium py-2 px-4 rounded-none hover:bg-white/5"
+                    className="text-white/70 hover:text-white transition-colors duration-300 text-sm font-medium py-2 px-4 rounded-lg hover:bg-white/5"
                   >
                     {item.name}
                   </a>
