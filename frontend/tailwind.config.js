@@ -87,6 +87,14 @@ module.exports = {
   				'0%': { borderColor: 'rgba(255, 255, 255, 0.1)' },
   				'50%': { borderColor: 'rgba(0, 255, 209, 0.5)' },
   				'100%': { borderColor: 'rgba(255, 255, 255, 0.1)' }
+  			},
+  			'shine': {
+  				'0%': { transform: 'translateX(-100%) skewX(-12deg)' },
+  				'100%': { transform: 'translateX(200%) skewX(-12deg)' }
+  			},
+  			'spin-slow': {
+  				'0%': { transform: 'rotate(0deg)' },
+  				'100%': { transform: 'rotate(360deg)' }
   			}
   		},
   		animation: {
