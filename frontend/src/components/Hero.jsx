@@ -36,16 +36,7 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-6 lg:px-16 text-center">
         <div className="max-w-4xl mx-auto">
           
-          {/* Credibility Strip */}
-          <ScrollReveal delay={0.1}>
-            <GlassBox className="inline-flex items-center space-x-4 px-4 py-2 mb-8">
-              <span className="text-white/60 text-sm font-medium">Since 2017</span>
-              <div className="w-1 h-1 bg-[#00FFD1] rounded-full"></div>
-              <span className="text-white/60 text-sm font-medium">500+ Meetings</span>
-              <div className="w-1 h-1 bg-[#00FFD1] rounded-full"></div>
-              <span className="text-white/60 text-sm font-medium">28% Conversion</span>
-            </GlassBox>
-          </ScrollReveal>
+
 
           {/* Main Headline - Reduced size and spacing */}
           <div className="mb-8">
