@@ -86,6 +86,7 @@ const Header = () => {
         blur={isScrolled ? 16 : 12}
         opacity={isScrolled ? 0.15 : 0.1}
         border={true}
+        style={{ position: 'relative', zIndex: 40 }}
       >
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
