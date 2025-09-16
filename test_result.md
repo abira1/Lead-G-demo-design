@@ -354,12 +354,17 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Services Dropdown Functionality"
-    - "Industries Dropdown Functionality"
-    - "Mobile Dropdown Functionality"
-    - "Dropdown Styling and Effects"
+    - "Homepage Sections Testing"
+    - "About Page Testing"
+    - "Contact Page Testing"
+    - "Navigation Testing"
+    - "Content Verification"
+    - "Responsiveness Testing"
+    - "Form Testing"
+    - "Privacy Policy Page Testing"
+    - "Terms of Service Page Testing"
   stuck_tasks: []
-  test_all: false
+  test_all: true
   test_priority: "high_first"
 
 agent_communication:
