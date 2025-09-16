@@ -14,10 +14,7 @@ const Header = () => {
   const location = useLocation();
   const dropdownRefs = useRef({});
 
-  const handleBookCall = () => {
-    // Navigate to contact page
-    window.location.href = '/contact';
-  };
+  // handleBookCall function removed as CTA button was removed
 
   // Icon mapping for services and industries
   const serviceIcons = {
