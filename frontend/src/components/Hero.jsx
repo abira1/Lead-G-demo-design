@@ -2,38 +2,42 @@ import React from 'react';
 import { heroData } from '../data/mock';
 import { Button } from './ui/button';
 import { ArrowRight, Phone, Play } from 'lucide-react';
+import LiquidEther from './LiquidEther';
 
 const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen bg-black overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Liquid Background */}
+      <div className="absolute inset-0 z-0">
+        <LiquidEther
+          colors={['#00FFD1', '#FF6EB4', '#8E66FF']}
+          mouseForce={25}
+          cursorSize={120}
+          isViscous={false}
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.6}
+          isBounce={false}
+          autoDemo={true}
+          autoSpeed={0.4}
+          autoIntensity={2.5}
+          takeoverDuration={0.3}
+          autoResumeDelay={2000}
+          autoRampDuration={0.8}
+          style={{ width: '100%', height: '100%' }}
+        />
+      </div>
+
+      {/* Background Pattern Overlay */}
+      <div className="absolute inset-0 opacity-3 z-1">
         <div className="absolute inset-0" 
              style={{
                backgroundImage: `
-                 repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,0.1) 1px, rgba(255,255,255,0.1) 2px),
-                 repeating-linear-gradient(-90deg, transparent, transparent 1px, rgba(255,255,255,0.1) 1px, rgba(255,255,255,0.1) 2px)
+                 repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,0.05) 1px, rgba(255,255,255,0.05) 2px),
+                 repeating-linear-gradient(-90deg, transparent, transparent 1px, rgba(255,255,255,0.05) 1px, rgba(255,255,255,0.05) 2px)
                `,
                backgroundSize: '60px 60px'
-             }}>
-        </div>
-      </div>
-
-      {/* Flowing Ribbon Gradient */}
-      <div className="absolute top-20 -right-40 w-96 h-96 opacity-20">
-        <div className="w-full h-full rounded-full"
-             style={{
-               background: 'linear-gradient(135deg, #FF9A6B 0%, #FF6EB4 50%, #8E66FF 100%)',
-               filter: 'blur(80px)'
-             }}>
-        </div>
-      </div>
-
-      <div className="absolute bottom-20 -left-40 w-80 h-80 opacity-15">
-        <div className="w-full h-full rounded-full"
-             style={{
-               background: 'linear-gradient(45deg, #00FFD1 0%, #FF6EB4 50%, #8E66FF 100%)',
-               filter: 'blur(100px)'
              }}>
         </div>
       </div>
