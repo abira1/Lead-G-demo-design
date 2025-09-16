@@ -234,9 +234,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Backend API endpoints verification"
-    - "Service health check"
-    - "Database connectivity"
+    - "Services Dropdown Functionality"
+    - "Industries Dropdown Functionality"
+    - "Mobile Dropdown Functionality"
+    - "Dropdown Styling and Effects"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
