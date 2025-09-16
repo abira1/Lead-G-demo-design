@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { heroData } from '../data/mock';
 import { Button } from './ui/button';
@@ -7,6 +7,7 @@ import LiquidEther from './LiquidEther';
 import ScrollReveal from './ScrollReveal';
 import GlassBox from './GlassBox';
 import { ShinyCard } from './ui/shiny-card';
+import VariableProximity from './VariableProximity';
 
 const Hero = () => {
   return (
