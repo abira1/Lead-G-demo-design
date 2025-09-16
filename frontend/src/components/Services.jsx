@@ -40,7 +40,7 @@ const Services = () => {
                   className="group p-8 lg:p-12 h-full flex flex-col cursor-pointer"
                   blur={16}
                   opacity={0.1}
-                  noise={true}
+                  noise={false}
                   hover={true}
                   glow={true}
                   hoverScale={1.05}
