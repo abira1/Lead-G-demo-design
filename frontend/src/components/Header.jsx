@@ -75,7 +75,21 @@ const Header = () => {
   const handleDropdownToggle = (itemName, e) => {
     e.preventDefault();
     e.stopPropagation();
-    setActiveDropdown(activeDropdown === itemName ? null : itemName);
+    
+    if (activeDropdown === itemName) {
+      setActiveDropdown(null);
+    } else {
+      // Calculate position for the dropdown
+      const buttonElement = dropdownRefs.current[itemName];
+      if (buttonElement) {
+        const rect = buttonElement.getBoundingClientRect();
+        setDropdownPosition({
+          top: rect.bottom + 8, // 8px gap
+          left: rect.left
+        });
+      }
+      setActiveDropdown(itemName);
+    }
   };
 
   return (
