@@ -105,47 +105,64 @@ export const pricingData = [
     name: "Starter",
     price: "$2,999",
     period: "month",
-    description: "Perfect for small businesses getting started with outbound lead generation.",
+    description: "Perfect for small businesses getting started with outbound lead generation. Ideal for companies looking to test our services and establish consistent lead flow.",
     features: [
-      "100 qualified leads/month",
+      "100-150 qualified leads/month",
       "Basic telemarketing campaigns",
-      "Email & phone support",
-      "Monthly reporting",
-      "CRM integration"
+      "Email & phone support (Business hours)",
+      "Monthly reporting & analytics",
+      "CRM integration (HubSpot, Salesforce)",
+      "Lead qualification & scoring",
+      "Campaign optimization"
     ],
-    popular: false
+    popular: false,
+    bestFor: "Small businesses, startups, testing our services",
+    setupFee: "No setup fee",
+    contract: "Month-to-month, no long-term commitment"
   },
   {
     id: 2,
     name: "Growth",
     price: "$5,999",
     period: "month",
-    description: "Ideal for growing companies ready to scale their lead generation efforts.",
+    description: "Ideal for growing companies ready to scale their lead generation efforts. Our most popular package for established businesses.",
     features: [
-      "300 qualified leads/month",
-      "Multi-channel campaigns",
+      "300-500 qualified leads/month",
+      "Multi-channel campaigns (phone, email, social)",
       "Dedicated account manager",
-      "Weekly reporting",
-      "Advanced CRM integration",
-      "Social media campaigns"
+      "Weekly reporting & strategy calls",
+      "Advanced CRM integration & automation",
+      "Social media lead generation",
+      "A/B testing and optimization",
+      "Priority support"
     ],
-    popular: true
+    popular: true,
+    bestFor: "Growing businesses, scaling operations",
+    setupFee: "No setup fee",
+    contract: "3-month minimum commitment"
   },
   {
     id: 3,
     name: "Enterprise",
     price: "Custom",
     period: "month",
-    description: "Tailored solutions for large organizations with complex requirements.",
+    description: "Tailored solutions for large organizations with complex requirements. White-glove service with dedicated team and custom strategies.",
     features: [
-      "Unlimited qualified leads",
+      "500+ qualified leads/month",
       "Custom campaign strategies",
-      "Dedicated team",
-      "Real-time reporting",
-      "Full-service management",
-      "Government contracting support"
+      "Dedicated team of specialists",
+      "Real-time reporting dashboard",
+      "Full-service campaign management",
+      "Government contracting support",
+      "Industry-specific expertise",
+      "24/7 priority support",
+      "Custom integrations",
+      "Compliance & regulatory support"
     ],
-    popular: false
+    popular: false,
+    bestFor: "Large enterprises, complex requirements",
+    setupFee: "Custom setup included",
+    contract: "6-month minimum commitment"
   }
 ];
 
