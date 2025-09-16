@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the backend API endpoints to ensure they are still functioning properly after the UI updates. Check if all services are running correctly and there are no backend errors related to the frontend changes."
+user_problem_statement: "Test the dropdown functionality in the navbar of the Lead G website including Services dropdown, Industries dropdown, mobile dropdown functionality, styling verification, and hover effects."
 
 backend:
   - task: "Root API Endpoint"
