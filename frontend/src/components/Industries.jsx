@@ -72,7 +72,13 @@ const Industries = () => {
               <div className="text-3xl lg:text-4xl font-bold text-[#00FFD1] mb-2">250%</div>
               <div className="text-sm text-white/60 font-medium">Avg. Growth</div>
             </GlassBox>
-            <GlassBox className="p-6">
+            <GlassBox 
+              className="p-6 group cursor-pointer animate-float"
+              hover={true}
+              hoverScale={1.1}
+              glow={true}
+              style={{ animationDelay: `${1 * 0.2}s` }}
+            >
               <div className="text-3xl lg:text-4xl font-bold text-[#00FFD1] mb-2">500+</div>
               <div className="text-sm text-white/60 font-medium">Active Clients</div>
             </GlassBox>
