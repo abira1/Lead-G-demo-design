@@ -178,15 +178,7 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center">
-            <Button 
-              onClick={handleBookCall}
-              className="btn-primary bg-[#00FFD1] text-black border-none rounded-none px-3 py-1.5 text-xs font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[32px] cursor-pointer"
-            >
-              Book Call
-            </Button>
-          </div>
+          {/* CTA Button removed as requested */}
 
           {/* Mobile Menu Button */}
           <button
