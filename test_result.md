@@ -300,15 +300,18 @@ frontend:
 
   - task: "Terms of Service Page Testing"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/TermsOfService.jsx"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "testing"
           comment: "Need to test /terms-of-service page content and navigation."
+        - working: true
+          agent: "testing"
+          comment: "✅ PASSED: Terms of Service page working correctly. Navigation to /terms-of-service shows proper 'Terms of Service' heading and comprehensive terms content including Acceptance of Terms, Services Description, Client Responsibilities, Payment Terms, and contact information."
 
   - task: "Navigation Testing"
     implemented: true
