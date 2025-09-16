@@ -236,10 +236,16 @@ export const faqData = [
 ];
 
 export const contactData = {
-  email: "hello@leadg.com",
-  phone: "+1 (555) 123-4567",
-  address: "123 Business Center Dr, Suite 100, Austin, TX 78701",
-  hours: "Monday - Friday: 8:00 AM - 6:00 PM CST"
+  email: "contact@leadgenerationg.com",
+  phone: {
+    canada: "+1-416-857-9635",
+    bangladesh: "+880 1568-200728"
+  },
+  address: {
+    canada: "2920 Hwy 7 Vaughan, ON L4K0P4, Canada",
+    bangladesh: "Bashundhara, Block J, Dhaka, Bangladesh"
+  },
+  hours: "Monday - Friday: 9:00 AM - 6:00 PM EST/GMT+6"
 };
 
 export const statsData = [
