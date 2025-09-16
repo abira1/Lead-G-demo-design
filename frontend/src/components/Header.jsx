@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { navigationData } from '../data/mock';
 import { Button } from './ui/button';
 import { ChevronDown, Menu, X, Phone, Building, Share2, Home, DollarSign, Zap, Users } from 'lucide-react';
