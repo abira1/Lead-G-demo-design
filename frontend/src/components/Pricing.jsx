@@ -93,6 +93,7 @@ const Pricing = () => {
                 noise={false}
                 hover={true}
                 glow={plan.popular}
+                shine={true}
                 hoverScale={plan.popular ? 1.08 : 1.05}
               >
                 {/* Popular Badge */}
