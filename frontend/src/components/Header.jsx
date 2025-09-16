@@ -112,21 +112,22 @@ const Header = () => {
                     </button>
                     {activeDropdown === item.name && (
                       <div 
-                        className="fixed left-0 mt-2 w-56" 
+                        className="absolute top-full left-0 mt-2 w-56" 
                         data-dropdown 
                         style={{
-                          top: '100%',
-                          zIndex: 9999,
-                          position: 'absolute',
-                          transform: 'translateY(8px)'
+                          zIndex: 99999,
+                          position: 'absolute'
                         }}
                       >
-                        <GlassBox 
-                          className="py-2 shadow-2xl backdrop-blur-md"
-                          blur={16}
-                          opacity={0.5}
-                          border={true}
-                        >
+                        <div style={{
+                          background: 'rgba(0, 0, 0, 0.8)',
+                          backdropFilter: 'blur(16px)',
+                          WebkitBackdropFilter: 'blur(16px)',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          borderRadius: '8px',
+                          padding: '8px 0',
+                          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2)'
+                        }}>
                           {item.dropdown.map((subItem, index) => {
                             const IconComponent = item.name === 'Services' ? serviceIcons[subItem.name] : industryIcons[subItem.name];
                             return (
