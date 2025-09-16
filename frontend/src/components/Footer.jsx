@@ -1,7 +1,7 @@
 import React from 'react';
 import { navigationData, contactData } from '../data/mock';
 import { Button } from './ui/button';
-import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, ExternalLink } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import GlassBox from './GlassBox';
 
@@ -9,142 +9,219 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black border-t border-white/10">
+    <footer className="bg-black relative overflow-hidden">
       {/* Main Footer Content */}
       <div className="container mx-auto px-6 lg:px-16 py-20">
-        <div className="grid lg:grid-cols-4 gap-12 lg:gap-16">
+        
+        {/* Top Section - Newsletter & CTA */}
+        <ScrollReveal delay={0.2}>
+          <GlassBox 
+            className="text-center p-12 lg:p-16 mb-16"
+            blur={20}
+            opacity={0.15}
+            noise={true}
+          >
+            <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+              Ready to scale your business?
+            </h3>
+            <p className="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
+              Join 500+ companies that trust Lead G for their growth
+            </p>
+            
+            {/* Newsletter Signup */}
+            <div className="max-w-md mx-auto mb-8">
+              <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 bg-white/10 border border-white/20 text-white placeholder-white/50 px-4 py-3 focus:outline-none focus:border-[#00FFD1] transition-colors duration-300 rounded-none backdrop-blur-sm"
+                />
+                <Button className="btn-primary bg-[#00FFD1] text-black border-none rounded-none px-6 py-3 text-base font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 flex items-center space-x-2">
+                  <span>Subscribe</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+              </div>
+            </div>
+
+            <Button className="btn-primary bg-[#00FFD1] text-black border-none rounded-none px-8 py-4 text-lg font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[56px] flex items-center space-x-3 mx-auto">
+              <Phone className="w-5 h-5" />
+              <span>Book Free Consultation</span>
+              <ArrowRight className="w-5 h-5" />
+            </Button>
+          </GlassBox>
+        </ScrollReveal>
+
+        {/* Footer Cards Grid */}
+        <div className="grid lg:grid-cols-4 gap-8 mb-12">
           
-          {/* Company Info */}
-          <ScrollReveal delay={0.2}>
-            <div className="lg:col-span-1">
-              <div className="mb-8">
+          {/* Company Info Card */}
+          <ScrollReveal delay={0.4}>
+            <GlassBox 
+              className="p-6"
+              blur={16}
+              opacity={0.1}
+              noise={true}
+            >
+              <div className="mb-6">
                 <span className="text-2xl font-bold text-white tracking-tight">
                   {navigationData.logo}
                 </span>
               </div>
-              <p className="text-base text-white/60 font-medium leading-relaxed mb-8">
+              <p className="text-sm text-white/60 font-medium leading-relaxed mb-6">
                 Global partner in telemarketing, marketing, and government contracting since 2017.
               </p>
               
-              {/* Newsletter Signup */}
-              <GlassBox className="p-4">
-                <h4 className="text-lg font-bold text-white mb-4">Stay Updated</h4>
-                <div className="flex flex-col space-y-3">
-                  <input
-                    type="email"
-                    placeholder="Enter email"
-                    className="bg-white/10 border border-white/20 text-white placeholder-white/50 px-4 py-2 focus:outline-none focus:border-[#00FFD1] transition-colors duration-300 rounded-none text-sm"
-                  />
-                  <Button className="btn-primary bg-[#00FFD1] text-black border-none rounded-none px-4 py-2 text-sm font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 flex items-center justify-center space-x-2">
-                    <span>Subscribe</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </Button>
+              {/* Success Metrics */}
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-white/50">Since</span>
+                  <span className="text-sm text-[#00FFD1] font-bold">2017</span>
                 </div>
-              </GlassBox>
-            </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-white/50">Clients</span>
+                  <span className="text-sm text-[#00FFD1] font-bold">500+</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-xs text-white/50">Generated</span>
+                  <span className="text-sm text-[#00FFD1] font-bold">$50M+</span>
+                </div>
+              </div>
+            </GlassBox>
           </ScrollReveal>
 
-          {/* Quick Navigation */}
-          <ScrollReveal delay={0.4}>
-            <div className="lg:col-span-1">
+          {/* Quick Links Card */}
+          <ScrollReveal delay={0.6}>
+            <GlassBox 
+              className="p-6"
+              blur={16}
+              opacity={0.1}
+              noise={true}
+            >
               <h4 className="text-lg font-bold text-white mb-6">Quick Links</h4>
               <nav className="space-y-3">
                 {navigationData.menuItems.slice(0, 6).map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className="block text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium"
+                    className="flex items-center justify-between text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium group"
                   >
-                    {item.name}
+                    <span>{item.name}</span>
+                    <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </a>
                 ))}
               </nav>
-            </div>
+            </GlassBox>
           </ScrollReveal>
 
-          {/* Services */}
-          <ScrollReveal delay={0.6}>
-            <div className="lg:col-span-1">
+          {/* Services Card */}
+          <ScrollReveal delay={0.8}>
+            <GlassBox 
+              className="p-6"
+              blur={16}
+              opacity={0.1}
+              noise={true}
+            >
               <h4 className="text-lg font-bold text-white mb-6">Services</h4>
               <nav className="space-y-3">
-                <a href="#telemarketing" className="block text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium">
-                  Telemarketing
+                <a href="#telemarketing" className="flex items-center justify-between text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium group">
+                  <span>Telemarketing</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
-                <a href="#government" className="block text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium">
-                  Government Contracting
+                <a href="#government" className="flex items-center justify-between text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium group">
+                  <span>Government Contracting</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
-                <a href="#social-media" className="block text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium">
-                  Social Media Marketing
+                <a href="#social-media" className="flex items-center justify-between text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium group">
+                  <span>Social Media Marketing</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
-                <a href="#consultation" className="block text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium">
-                  Strategy Consultation
+                <a href="#consultation" className="flex items-center justify-between text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium group">
+                  <span>Strategy Consultation</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </a>
+                <a href="#case-studies" className="flex items-center justify-between text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium group">
+                  <span>Case Studies</span>
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </a>
               </nav>
-            </div>
+            </GlassBox>
           </ScrollReveal>
 
-          {/* Contact Information */}
-          <ScrollReveal delay={0.8}>
-            <div className="lg:col-span-1">
-              <h4 className="text-lg font-bold text-white mb-6">Contact</h4>
+          {/* Contact Card */}
+          <ScrollReveal delay={1.0}>
+            <GlassBox 
+              className="p-6"
+              blur={16}
+              opacity={0.1}
+              noise={true}
+            >
+              <h4 className="text-lg font-bold text-white mb-6">Get in Touch</h4>
               <div className="space-y-4">
                 
                 <div className="flex items-start space-x-3">
-                  <div className="w-8 h-8 bg-[#00FFD1]/20 rounded-none flex items-center justify-center flex-shrink-0">
+                  <GlassBox className="w-8 h-8 rounded-none flex items-center justify-center flex-shrink-0" opacity={0.2}>
                     <Mail className="w-4 h-4 text-[#00FFD1]" />
-                  </div>
+                  </GlassBox>
                   <div>
                     <p className="text-white/70 font-medium text-sm">{contactData.email}</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3">
-                  <div className="w-8 h-8 bg-[#00FFD1]/20 rounded-none flex items-center justify-center flex-shrink-0">
+                  <GlassBox className="w-8 h-8 rounded-none flex items-center justify-center flex-shrink-0" opacity={0.2}>
                     <Phone className="w-4 h-4 text-[#00FFD1]" />
-                  </div>
+                  </GlassBox>
                   <div>
                     <p className="text-white/70 font-medium text-sm">{contactData.phone}</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-3">
-                  <div className="w-8 h-8 bg-[#00FFD1]/20 rounded-none flex items-center justify-center flex-shrink-0">
+                  <GlassBox className="w-8 h-8 rounded-none flex items-center justify-center flex-shrink-0" opacity={0.2}>
                     <MapPin className="w-4 h-4 text-[#00FFD1]" />
-                  </div>
+                  </GlassBox>
                   <div>
                     <p className="text-white/70 font-medium text-sm leading-relaxed">
                       Austin, TX 78701
                     </p>
                   </div>
                 </div>
+
+                {/* Business Hours */}
+                <div className="pt-3 border-t border-white/10">
+                  <p className="text-xs text-white/50 font-medium">
+                    Monday - Friday: 8:00 AM - 6:00 PM CST
+                  </p>
+                </div>
               </div>
-            </div>
+            </GlassBox>
           </ScrollReveal>
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="container mx-auto px-6 lg:px-16 py-6">
-          <div className="flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0">
-            
-            <div className="text-white/60 font-medium text-sm">
+        {/* Bottom Bar */}
+        <ScrollReveal delay={1.2}>
+          <GlassBox 
+            className="flex flex-col lg:flex-row items-center justify-between p-6"
+            blur={12}
+            opacity={0.05}
+          >
+            <div className="text-white/60 font-medium text-sm mb-4 lg:mb-0">
               © {currentYear} Lead G. All rights reserved.
             </div>
 
             <div className="flex items-center space-x-6">
               <a href="/privacy" className="text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium text-sm">
-                Privacy
+                Privacy Policy
               </a>
               <a href="/terms" className="text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium text-sm">
-                Terms
+                Terms of Service
               </a>
               <a href="/cookies" className="text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium text-sm">
-                Cookies
+                Cookie Policy
               </a>
             </div>
-          </div>
-        </div>
+          </GlassBox>
+        </ScrollReveal>
       </div>
     </footer>
   );

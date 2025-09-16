@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { navigationData } from '../data/mock';
 import { Button } from './ui/button';
 import { ChevronDown, Menu, X } from 'lucide-react';
+import GlassBox from './GlassBox';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,48 +27,56 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-400 ${
-      isScrolled ? 'bg-black/95 backdrop-blur-sm border-b border-white/10' : 'bg-transparent'
+      isScrolled ? 'pt-4 px-4' : 'pt-6 px-6'
     }`}>
-      <div className="container mx-auto px-6 lg:px-16">
-        <div className="flex items-center justify-between h-20">
+      {/* Glass Card Navigation */}
+      <GlassBox 
+        className="container mx-auto max-w-6xl px-6 lg:px-8 transition-all duration-400"
+        blur={isScrolled ? 16 : 12}
+        opacity={isScrolled ? 0.15 : 0.1}
+        border={true}
+      >
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-white tracking-tight">
+            <span className="text-xl font-bold text-white tracking-tight">
               {navigationData.logo}
             </span>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navigationData.menuItems.map((item) => (
+          <nav className="hidden lg:flex items-center space-x-1">
+            {navigationData.menuItems.slice(0, 6).map((item) => (
               <div key={item.name} className="relative group">
                 {item.dropdown ? (
                   <div className="relative">
                     <button
-                      className="flex items-center space-x-1 text-white/70 hover:text-white transition-colors duration-300 py-2"
+                      className="flex items-center space-x-1 text-white/70 hover:text-white transition-colors duration-300 py-2 px-4 rounded-none hover:bg-white/5"
                       onClick={() => handleDropdownToggle(item.name)}
                     >
-                      <span className="text-lg font-medium">{item.name}</span>
-                      <ChevronDown className="w-4 h-4" />
+                      <span className="text-sm font-medium">{item.name}</span>
+                      <ChevronDown className="w-3 h-3" />
                     </button>
                     {activeDropdown === item.name && (
-                      <div className="absolute top-full left-0 mt-2 w-56 bg-black/95 backdrop-blur-sm border border-white/10 rounded-none shadow-xl">
-                        {item.dropdown.map((subItem) => (
-                          <a
-                            key={subItem.name}
-                            href={subItem.href}
-                            className="block px-6 py-4 text-white/70 hover:text-white hover:bg-white/5 transition-all duration-300 text-lg font-medium"
-                          >
-                            {subItem.name}
-                          </a>
-                        ))}
+                      <div className="absolute top-full left-0 mt-2 w-48">
+                        <GlassBox className="py-2">
+                          {item.dropdown.map((subItem) => (
+                            <a
+                              key={subItem.name}
+                              href={subItem.href}
+                              className="block px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 transition-all duration-300 text-sm font-medium"
+                            >
+                              {subItem.name}
+                            </a>
+                          ))}
+                        </GlassBox>
                       </div>
                     )}
                   </div>
                 ) : (
                   <a
                     href={item.href}
-                    className="text-white/70 hover:text-white transition-colors duration-300 text-lg font-medium"
+                    className="text-white/70 hover:text-white transition-colors duration-300 text-sm font-medium py-2 px-4 rounded-none hover:bg-white/5"
                   >
                     {item.name}
                   </a>
@@ -77,69 +86,71 @@ const Header = () => {
           </nav>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <Button className="btn-primary bg-[#00FFD1] text-black border-none rounded-none px-6 py-3 text-lg font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[56px]">
-              Book a Free Call
+          <div className="hidden lg:flex items-center">
+            <Button className="btn-primary bg-[#00FFD1] text-black border-none rounded-none px-5 py-2 text-sm font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[40px]">
+              Book Free Call
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden text-white p-2"
+            className="lg:hidden text-white p-2 hover:bg-white/5 rounded-none transition-colors duration-300"
             onClick={toggleMobileMenu}
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-sm border-b border-white/10">
-            <nav className="container mx-auto px-6 py-6">
-              {navigationData.menuItems.map((item) => (
-                <div key={item.name} className="mb-4">
-                  {item.dropdown ? (
-                    <div>
-                      <button
-                        className="flex items-center justify-between w-full text-white/70 hover:text-white transition-colors duration-300 py-2 text-lg font-medium"
-                        onClick={() => handleDropdownToggle(item.name)}
+          <div className="lg:hidden">
+            <GlassBox className="mt-4 p-4" opacity={0.05}>
+              <nav className="space-y-2">
+                {navigationData.menuItems.slice(0, 6).map((item) => (
+                  <div key={item.name}>
+                    {item.dropdown ? (
+                      <div>
+                        <button
+                          className="flex items-center justify-between w-full text-white/70 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
+                          onClick={() => handleDropdownToggle(item.name)}
+                        >
+                          <span>{item.name}</span>
+                          <ChevronDown className="w-3 h-3" />
+                        </button>
+                        {activeDropdown === item.name && (
+                          <div className="ml-4 mt-2 space-y-1">
+                            {item.dropdown.map((subItem) => (
+                              <a
+                                key={subItem.name}
+                                href={subItem.href}
+                                className="block text-white/60 hover:text-white transition-colors duration-300 py-1 text-sm"
+                              >
+                                {subItem.name}
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <a
+                        href={item.href}
+                        className="block text-white/70 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
                       >
-                        <span>{item.name}</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </button>
-                      {activeDropdown === item.name && (
-                        <div className="ml-4 mt-2 space-y-2">
-                          {item.dropdown.map((subItem) => (
-                            <a
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="block text-white/60 hover:text-white transition-colors duration-300 py-2 text-base"
-                            >
-                              {subItem.name}
-                            </a>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <a
-                      href={item.href}
-                      className="block text-white/70 hover:text-white transition-colors duration-300 py-2 text-lg font-medium"
-                    >
-                      {item.name}
-                    </a>
-                  )}
+                        {item.name}
+                      </a>
+                    )}
+                  </div>
+                ))}
+                <div className="pt-4 border-t border-white/10">
+                  <Button className="w-full btn-primary bg-[#00FFD1] text-black border-none rounded-none px-4 py-2 text-sm font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[40px]">
+                    Book Free Call
+                  </Button>
                 </div>
-              ))}
-              <div className="mt-6 pt-6 border-t border-white/10">
-                <Button className="w-full btn-primary bg-[#00FFD1] text-black border-none rounded-none px-6 py-3 text-lg font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[56px]">
-                  Book a Free Call
-                </Button>
-              </div>
-            </nav>
+              </nav>
+            </GlassBox>
           </div>
         )}
-      </div>
+      </GlassBox>
     </header>
   );
 };

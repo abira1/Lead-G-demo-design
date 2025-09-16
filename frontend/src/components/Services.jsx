@@ -36,29 +36,38 @@ const Services = () => {
             
             return (
               <ScrollReveal key={service.id} delay={0.2 * (index + 1)}>
-                <GlassBox className="group p-8 lg:p-12 hover:scale-[1.02] transition-all duration-500">
+                <GlassBox 
+                  className="group p-8 lg:p-12 hover:scale-[1.02] transition-all duration-500 h-full flex flex-col"
+                  blur={16}
+                  opacity={0.1}
+                  noise={true}
+                >
                   
                   {/* Service Icon */}
-                  <div className="mb-8">
-                    <div className="w-16 h-16 bg-[#00FFD1]/20 backdrop-blur-sm rounded-none flex items-center justify-center group-hover:bg-[#00FFD1]/30 transition-all duration-400">
-                      <IconComponent className="w-8 h-8 text-[#00FFD1]" />
-                    </div>
+                  <div className="mb-8 text-center">
+                    <GlassBox className="w-20 h-20 mx-auto bg-[#00FFD1]/20 backdrop-blur-sm rounded-none flex items-center justify-center group-hover:bg-[#00FFD1]/30 transition-all duration-400">
+                      <IconComponent className="w-10 h-10 text-[#00FFD1]" />
+                    </GlassBox>
                   </div>
 
                   {/* Service Content */}
-                  <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 leading-tight">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-base text-white/70 font-medium leading-relaxed mb-8">
-                    {service.description}
-                  </p>
+                  <div className="text-center flex-grow">
+                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-6 leading-tight">
+                      {service.title}
+                    </h3>
+                    
+                    <p className="text-base text-white/70 font-medium leading-relaxed mb-8">
+                      {service.description}
+                    </p>
+                  </div>
 
                   {/* Learn More Button */}
-                  <Button className="btn-secondary bg-white/10 text-white border-none rounded-none px-6 py-3 text-base font-medium hover:bg-white hover:text-black transition-all duration-400 min-h-[48px] flex items-center space-x-3 group w-full justify-center">
-                    <span>Learn More</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  </Button>
+                  <div className="mt-auto">
+                    <Button className="btn-secondary bg-white/10 text-white border-none rounded-none px-6 py-3 text-base font-medium hover:bg-white hover:text-black transition-all duration-400 min-h-[48px] flex items-center space-x-3 group w-full justify-center">
+                      <span>Learn More</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Button>
+                  </div>
                 </GlassBox>
               </ScrollReveal>
             );
