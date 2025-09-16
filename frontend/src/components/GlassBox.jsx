@@ -6,9 +6,10 @@ const GlassBox = ({
   blur = 12,
   opacity = 0.1,
   border = true,
-  noise = false, // Changed default to false to fix dotted effect issue
+  noise = false,
   hover = true,
   glow = false,
+  shine = true, // New shine effect prop
   hoverScale = 1.02,
   ...props 
 }) => {
@@ -16,6 +17,7 @@ const GlassBox = ({
     relative overflow-hidden transition-all duration-500 ease-out
     ${hover ? 'hover:shadow-2xl hover:shadow-cyan-500/10' : ''}
     ${glow ? 'hover:shadow-lg hover:shadow-cyan-400/20' : ''}
+    ${shine ? 'group' : ''}
     ${className}
   `;
 
@@ -52,6 +54,19 @@ const GlassBox = ({
       }}
       {...props}
     >
+      {/* Shimmer shine effect */}
+      {shine && (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div 
+            className="absolute -top-4 -left-4 w-6 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-[calc(100vw)] opacity-0 group-hover:opacity-100 transition-all duration-1000 ease-out"
+            style={{
+              background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), rgba(0, 255, 209, 0.3), rgba(255, 255, 255, 0.4), transparent)',
+              filter: 'blur(0.5px)'
+            }}
+          />
+        </div>
+      )}
+
       {/* Enhanced border gradient on hover */}
       {border && (
         <div className="absolute inset-0 rounded-inherit opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
@@ -78,6 +93,41 @@ const GlassBox = ({
           }}
         />
       </div>
+
+      {/* Rotating shine effect */}
+      {shine && (
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none">
+          <div 
+            className="absolute inset-0 animate-spin-slow"
+            style={{
+              background: 'conic-gradient(from 0deg, transparent, rgba(0, 255, 209, 0.2), transparent)',
+              animationDuration: '8s'
+            }}
+          />
+        </div>
+      )}
+
+      {/* Corner shine highlights */}
+      {shine && (
+        <>
+          <div className="absolute top-0 left-0 w-16 h-16 opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none">
+            <div 
+              className="w-full h-full"
+              style={{
+                background: 'radial-gradient(circle at top left, rgba(255, 255, 255, 0.6), transparent 70%)',
+              }}
+            />
+          </div>
+          <div className="absolute bottom-0 right-0 w-12 h-12 opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none">
+            <div 
+              className="w-full h-full"
+              style={{
+                background: 'radial-gradient(circle at bottom right, rgba(0, 255, 209, 0.4), transparent 70%)',
+              }}
+            />
+          </div>
+        </>
+      )}
 
       {/* Subtle noise texture only when explicitly enabled */}
       {noise && (
