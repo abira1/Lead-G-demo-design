@@ -285,15 +285,18 @@ frontend:
 
   - task: "Privacy Policy Page Testing"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/frontend/src/components/PrivacyPolicy.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "testing"
           comment: "Need to test /privacy-policy page content and navigation."
+        - working: false
+          agent: "testing"
+          comment: "❌ FAILED: Privacy Policy page routing issue. When navigating to /privacy-policy, the page shows homepage content instead of Privacy Policy component. Privacy Policy heading not found despite component being properly implemented with comprehensive privacy policy content."
 
   - task: "Terms of Service Page Testing"
     implemented: true
