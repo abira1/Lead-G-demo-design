@@ -146,37 +146,55 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden">
-            <GlassBox className="mt-4 p-4" opacity={0.05}>
+            <GlassBox 
+              className="mt-4 p-4" 
+              opacity={0.1}
+              blur={16}
+              border={true}
+            >
               <nav className="space-y-2">
                 {navigationData.menuItems.slice(0, 6).map((item) => (
                   <div key={item.name}>
                     {item.dropdown ? (
                       <div>
                         <button
-                          className="flex items-center justify-between w-full text-white/70 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
-                          onClick={() => handleDropdownToggle(item.name)}
+                          className="flex items-center justify-between w-full text-white/70 hover:text-white transition-colors duration-300 py-3 px-2 text-sm font-medium rounded-lg hover:bg-white/5"
+                          onClick={(e) => handleDropdownToggle(item.name, e)}
                         >
                           <span>{item.name}</span>
-                          <ChevronDown className="w-3 h-3" />
+                          <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
+                            activeDropdown === item.name ? 'rotate-180' : ''
+                          }`} />
                         </button>
                         {activeDropdown === item.name && (
-                          <div className="ml-4 mt-2 space-y-1">
-                            {item.dropdown.map((subItem) => (
-                              <a
-                                key={subItem.name}
-                                href={subItem.href}
-                                className="block text-white/60 hover:text-white transition-colors duration-300 py-1 text-sm"
-                              >
-                                {subItem.name}
-                              </a>
-                            ))}
+                          <div className="ml-2 mt-2 space-y-1 pl-4 border-l border-white/20">
+                            {item.dropdown.map((subItem) => {
+                              const IconComponent = item.name === 'Services' ? serviceIcons[subItem.name] : industryIcons[subItem.name];
+                              return (
+                                <a
+                                  key={subItem.name}
+                                  href={subItem.href}
+                                  className="flex items-center space-x-3 text-white/60 hover:text-white transition-colors duration-300 py-2 px-2 text-sm rounded-lg hover:bg-white/5"
+                                  onClick={() => {
+                                    setActiveDropdown(null);
+                                    setIsMobileMenuOpen(false);
+                                  }}
+                                >
+                                  {IconComponent && (
+                                    <IconComponent className="w-4 h-4 text-[#00FFD1]" />
+                                  )}
+                                  <span>{subItem.name}</span>
+                                </a>
+                              );
+                            })}
                           </div>
                         )}
                       </div>
                     ) : (
                       <a
                         href={item.href}
-                        className="block text-white/70 hover:text-white transition-colors duration-300 py-2 text-sm font-medium"
+                        className="block text-white/70 hover:text-white transition-colors duration-300 py-3 px-2 text-sm font-medium rounded-lg hover:bg-white/5"
+                        onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {item.name}
                       </a>
@@ -184,7 +202,7 @@ const Header = () => {
                   </div>
                 ))}
                 <div className="pt-4 border-t border-white/10">
-                  <Button className="w-full btn-primary bg-[#00FFD1] text-black border-none rounded-none px-4 py-2 text-sm font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[40px]">
+                  <Button className="w-full btn-primary bg-[#00FFD1] text-black border-none rounded-lg px-4 py-2 text-sm font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[40px]">
                     Book Free Call
                   </Button>
                 </div>
