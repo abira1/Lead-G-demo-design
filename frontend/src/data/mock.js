@@ -270,3 +270,93 @@ export const statsData = [
     suffix: "+"
   }
 ];
+
+// About Us Data
+export const aboutData = {
+  mission: "To empower businesses worldwide with expert lead generation and marketing solutions that drive measurable growth and success.",
+  vision: "To become the global leader in B2B lead generation, transforming how businesses connect with their ideal customers across all industries.",
+  values: [
+    {
+      title: "Results-Driven",
+      description: "We measure our success by your growth. Every campaign is optimized for maximum ROI and qualified lead generation."
+    },
+    {
+      title: "Transparency",
+      description: "Open communication, clear reporting, and honest insights. You'll always know exactly how your campaigns are performing."
+    },
+    {
+      title: "Industry Expertise",
+      description: "Deep knowledge across solar, real estate, hard money lending, and government contracting industries ensures targeted success."
+    },
+    {
+      title: "Global Reach",
+      description: "With operations in North America and South Asia, we provide 24/7 support and localized expertise for global markets."
+    }
+  ],
+  story: "Founded in 2017, Lead G began as a specialized telemarketing agency focused on helping small businesses generate qualified leads. Over 8 years, we've evolved into a comprehensive lead generation powerhouse, serving over 500 clients across diverse industries including solar energy, real estate, hard money lending, and government contracting. Our unique combination of human expertise and cutting-edge technology has generated over $50M in revenue for our clients.",
+  team: {
+    size: "50+",
+    experience: "8+ years average",
+    locations: "Canada & Bangladesh"
+  }
+};
+
+// Company Information
+export const companyInfo = {
+  founded: "2017",
+  employees: "50+",
+  headquarters: "Vaughan, Ontario, Canada",
+  industries: ["Solar Energy", "Real Estate", "Hard Money Lending", "Government Contracting"],
+  certifications: ["ISO 9001:2015", "Privacy Shield Certified"],
+  awards: ["Best Lead Generation Agency 2023", "Top Telemarketing Service Provider"]
+};
+
+// Contact Form Fields
+export const contactFormFields = [
+  { name: "firstName", type: "text", label: "First Name", required: true },
+  { name: "lastName", type: "text", label: "Last Name", required: true },
+  { name: "email", type: "email", label: "Email Address", required: true },
+  { name: "phone", type: "tel", label: "Phone Number", required: true },
+  { name: "company", type: "text", label: "Company Name", required: true },
+  { name: "industry", type: "select", label: "Industry", required: true, options: [
+    "Solar Energy", "Real Estate", "Hard Money Lending", "Government Contracting", "Other"
+  ]},
+  { name: "service", type: "select", label: "Service Interested In", required: true, options: [
+    "Telemarketing", "Government Contracting", "Social Media Marketing", "Multiple Services"
+  ]},
+  { name: "message", type: "textarea", label: "Tell us about your lead generation goals", required: true }
+];
+
+// Blog Data (Optional)
+export const blogData = [
+  {
+    id: 1,
+    title: "5 Proven Strategies to Increase Solar Lead Conversion Rates",
+    excerpt: "Discover the tactics that top solar companies use to convert more leads into customers.",
+    author: "Lead G Team",
+    date: "2024-12-10",
+    category: "Solar",
+    readTime: "5 min read",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "Government Contracting 101: How to Win Your First Federal Contract",
+    excerpt: "A complete guide to navigating the federal contracting process for new businesses.",
+    author: "Lead G Team", 
+    date: "2024-12-08",
+    category: "Government",
+    readTime: "8 min read",
+    featured: false
+  },
+  {
+    id: 3,
+    title: "Real Estate Lead Generation: Quality vs Quantity",
+    excerpt: "Why focusing on lead quality over quantity generates better ROI for real estate agents.",
+    author: "Lead G Team",
+    date: "2024-12-05",
+    category: "Real Estate", 
+    readTime: "6 min read",
+    featured: false
+  }
+];
