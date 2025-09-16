@@ -130,13 +130,13 @@ const Header = () => {
                     </button>
                     {activeDropdown === item.name && (
                       <div 
-                        className="fixed mt-2 w-56" 
+                        className="fixed w-56" 
                         data-dropdown 
                         style={{
                           zIndex: 99999,
                           position: 'fixed',
-                          top: `calc(${isScrolled ? '4rem + 1rem + 8px' : '6rem + 1rem + 8px'})`,
-                          left: `${document.querySelector(`[data-dropdown-trigger="${item.name}"]`)?.getBoundingClientRect()?.left || 0}px`,
+                          top: `${dropdownPosition.top}px`,
+                          left: `${dropdownPosition.left}px`,
                           transform: 'translateY(0)'
                         }}
                       >
