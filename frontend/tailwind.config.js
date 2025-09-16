@@ -103,7 +103,9 @@ module.exports = {
   			'float': 'float 3s ease-in-out infinite',
   			'glow': 'glow 2s ease-in-out infinite',
   			'shimmer': 'shimmer 1.5s ease-in-out',
-  			'pulse-border': 'pulse-border 2s ease-in-out infinite'
+  			'pulse-border': 'pulse-border 2s ease-in-out infinite',
+  			'shine': 'shine 2s ease-in-out',
+  			'spin-slow': 'spin-slow 8s linear infinite'
   		}
   	}
   },
