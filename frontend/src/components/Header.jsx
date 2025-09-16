@@ -48,6 +48,7 @@ const Header = () => {
   };
 
   const handleDropdownToggle = (itemName, e) => {
+    e.preventDefault();
     e.stopPropagation();
     setActiveDropdown(activeDropdown === itemName ? null : itemName);
   };
