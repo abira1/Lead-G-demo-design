@@ -381,16 +381,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Homepage Sections Testing"
     - "About Page Testing"
-    - "Contact Page Testing"
-    - "Navigation Testing"
-    - "Content Verification"
-    - "Responsiveness Testing"
-    - "Form Testing"
     - "Privacy Policy Page Testing"
-    - "Terms of Service Page Testing"
-  stuck_tasks: []
+  stuck_tasks:
+    - "About Page Testing"
+    - "Privacy Policy Page Testing"
   test_all: true
   test_priority: "high_first"
 
