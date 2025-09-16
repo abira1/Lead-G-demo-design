@@ -37,35 +37,42 @@ const Services = () => {
             return (
               <ScrollReveal key={service.id} delay={0.2 * (index + 1)}>
                 <GlassBox 
-                  className="group p-8 lg:p-12 hover:scale-[1.02] transition-all duration-500 h-full flex flex-col"
+                  className="group p-8 lg:p-12 h-full flex flex-col cursor-pointer"
                   blur={16}
                   opacity={0.1}
                   noise={true}
+                  hover={true}
+                  glow={true}
+                  hoverScale={1.05}
                 >
                   
                   {/* Service Icon */}
                   <div className="mb-8 text-center">
-                    <GlassBox className="w-20 h-20 mx-auto bg-[#00FFD1]/20 backdrop-blur-sm rounded-none flex items-center justify-center group-hover:bg-[#00FFD1]/30 transition-all duration-400">
-                      <IconComponent className="w-10 h-10 text-[#00FFD1]" />
+                    <GlassBox 
+                      className="w-20 h-20 mx-auto bg-[#00FFD1]/20 backdrop-blur-sm rounded-none flex items-center justify-center transition-all duration-500 group-hover:bg-[#00FFD1]/40 group-hover:scale-110 group-hover:rotate-3" 
+                      hover={true}
+                      glow={true}
+                    >
+                      <IconComponent className="w-10 h-10 text-[#00FFD1] transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-lg" />
                     </GlassBox>
                   </div>
 
                   {/* Service Content */}
                   <div className="text-center flex-grow">
-                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-6 leading-tight">
+                    <h3 className="text-2xl lg:text-3xl font-bold text-white mb-6 leading-tight transition-all duration-300 group-hover:text-[#00FFD1] group-hover:scale-105">
                       {service.title}
                     </h3>
                     
-                    <p className="text-base text-white/70 font-medium leading-relaxed mb-8">
+                    <p className="text-base text-white/70 font-medium leading-relaxed mb-8 transition-all duration-300 group-hover:text-white/90">
                       {service.description}
                     </p>
                   </div>
 
                   {/* Learn More Button */}
                   <div className="mt-auto">
-                    <Button className="btn-secondary bg-white/10 text-white border-none rounded-none px-6 py-3 text-base font-medium hover:bg-white hover:text-black transition-all duration-400 min-h-[48px] flex items-center space-x-3 group w-full justify-center">
-                      <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    <Button className="bg-white/10 text-white border-none rounded-none px-6 py-3 text-base font-medium hover:bg-[#00FFD1] hover:text-black transition-all duration-400 min-h-[48px] flex items-center space-x-3 group w-full justify-center transform hover:scale-105 hover:shadow-lg hover:shadow-[#00FFD1]/25">
+                      <span className="transition-all duration-300">Learn More</span>
+                      <ArrowRight className="w-4 h-4 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" />
                     </Button>
                   </div>
                 </GlassBox>
