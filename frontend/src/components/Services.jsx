@@ -12,6 +12,17 @@ const iconMap = {
 };
 
 const Services = () => {
+  const handleLearnMore = (serviceName) => {
+    // Scroll to contact section for lead generation
+    const contactSection = document.getElementById('contact') || document.querySelector('#contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // If no contact section on current page, navigate to contact page
+      window.location.href = '/contact';
+    }
+  };
+
   return (
     <section id="services" className="bg-black py-24 lg:py-32">
       <div className="container mx-auto px-6 lg:px-16">
