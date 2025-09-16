@@ -111,13 +111,19 @@ const Hero = () => {
           {/* CTA Buttons - Immediate load */}
           <ScrollReveal delay={0.5}>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-8">
-              <Button className="bg-[#00FFD1] text-black border-none rounded-none px-8 py-4 text-lg font-medium hover:bg-[#00FFD1]/90 hover:scale-105 transition-all duration-300 min-h-[56px] flex items-center space-x-3 group">
+              <Button 
+                onClick={handleBookCall}
+                className="bg-[#00FFD1] text-black border-none rounded-none px-8 py-4 text-lg font-medium hover:bg-[#00FFD1]/90 hover:scale-105 transition-all duration-300 min-h-[56px] flex items-center space-x-3 group cursor-pointer"
+              >
                 <Phone className="w-5 h-5" />
                 <span>Book Free Call</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
               
-              <Button className="bg-white/10 text-white border-none rounded-none px-8 py-4 text-lg font-medium hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 min-h-[56px] flex items-center space-x-3">
+              <Button 
+                onClick={handleSeePricing}
+                className="bg-white/10 text-white border-none rounded-none px-8 py-4 text-lg font-medium hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 min-h-[56px] flex items-center space-x-3 cursor-pointer"
+              >
                 <span>See Pricing</span>
               </Button>
             </div>
