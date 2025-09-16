@@ -76,21 +76,21 @@ const Hero = () => {
             </div>
           </ScrollReveal>
 
-          {/* Compact Success Metrics */}
+          {/* Compact Success Metrics with Shiny Effects */}
           <ScrollReveal delay={0.6}>
             <div className="grid grid-cols-3 gap-6 max-w-xl mx-auto">
-              <GlassBox className="p-4 text-center" hover={true} hoverScale={1.05}>
-                <div className="text-xl lg:text-2xl font-bold text-[#00FFD1] mb-1">250%</div>
-                <div className="text-xs text-white/60 font-medium">Growth</div>
-              </GlassBox>
-              <GlassBox className="p-4 text-center" hover={true} hoverScale={1.05}>
-                <div className="text-xl lg:text-2xl font-bold text-[#00FFD1] mb-1">500+</div>
-                <div className="text-xs text-white/60 font-medium">Clients</div>
-              </GlassBox>
-              <GlassBox className="p-4 text-center" hover={true} hoverScale={1.05}>
-                <div className="text-xl lg:text-2xl font-bold text-[#00FFD1] mb-1">$50M+</div>
-                <div className="text-xs text-white/60 font-medium">Generated</div>
-              </GlassBox>
+              <ShinyCard className="p-4 text-center" intensity="normal">
+                <div className="text-xl lg:text-2xl font-bold text-[#00FFD1] mb-1 group-hover:scale-110 transition-transform duration-300">250%</div>
+                <div className="text-xs text-white/60 font-medium group-hover:text-white/80 transition-colors duration-300">Growth</div>
+              </ShinyCard>
+              <ShinyCard className="p-4 text-center" intensity="normal">
+                <div className="text-xl lg:text-2xl font-bold text-[#00FFD1] mb-1 group-hover:scale-110 transition-transform duration-300">500+</div>
+                <div className="text-xs text-white/60 font-medium group-hover:text-white/80 transition-colors duration-300">Clients</div>
+              </ShinyCard>
+              <ShinyCard className="p-4 text-center" intensity="normal">
+                <div className="text-xl lg:text-2xl font-bold text-[#00FFD1] mb-1 group-hover:scale-110 transition-transform duration-300">$50M+</div>
+                <div className="text-xs text-white/60 font-medium group-hover:text-white/80 transition-colors duration-300">Generated</div>
+              </ShinyCard>
             </div>
           </ScrollReveal>
         </div>
