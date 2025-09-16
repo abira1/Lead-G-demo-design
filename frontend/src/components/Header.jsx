@@ -9,7 +9,9 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const location = useLocation();
+  const dropdownRefs = useRef({});
 
   const handleBookCall = () => {
     // Navigate to contact page
