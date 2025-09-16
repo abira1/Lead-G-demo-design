@@ -71,23 +71,31 @@ export const servicesData = [
 export const industriesData = [
   {
     name: "Real Estate",
-    description: "Specialized lead generation for real estate professionals, investors, and agencies.",
-    metrics: "45% increase in qualified leads"
+    description: "Specialized lead generation for real estate professionals, investors, and agencies. We understand the unique challenges of the real estate market and provide targeted solutions for agents, brokers, and property developers.",
+    metrics: "45% increase in qualified leads",
+    services: ["Agent lead generation", "Investor prospecting", "Property listing campaigns", "Buyer qualification"],
+    caseStudy: "Helped a regional real estate firm double their listings through targeted telemarketing campaigns."
   },
   {
     name: "Hard Money Lending",
-    description: "Connect hard money lenders with qualified borrowers and investment opportunities.",
-    metrics: "60% faster deal closure"
+    description: "Connect hard money lenders with qualified borrowers and investment opportunities. Our expertise in financial services ensures compliance while maximizing deal flow for private lenders.",
+    metrics: "60% faster deal closure",
+    services: ["Borrower qualification", "Investor outreach", "Deal sourcing", "Compliance support"],
+    caseStudy: "Generated $15M in loan applications for a private lending firm in 6 months."
   },
   {
     name: "Solar Energy",
-    description: "Generate high-quality leads for solar installation and renewable energy companies.",
-    metrics: "35% conversion improvement"
+    description: "Generate high-quality leads for solar installation and renewable energy companies. We help solar businesses navigate the competitive market with targeted lead generation strategies.",
+    metrics: "35% conversion improvement",
+    services: ["Residential solar leads", "Commercial solar prospects", "Energy consultation", "Government incentive education"],
+    caseStudy: "Helped a solar company scale from $2M to $10M annual revenue through strategic lead generation."
   },
   {
     name: "Government Contracting",
-    description: "Help businesses secure lucrative government contracts and navigate procurement.",
-    metrics: "$2M+ in contracts secured"
+    description: "Help businesses secure lucrative government contracts and navigate complex procurement processes. Our government contracting expertise spans federal, state, and local opportunities.",
+    metrics: "$50M+ in contracts secured",
+    services: ["Contract opportunity identification", "Proposal development", "Compliance consulting", "Past performance building"],
+    caseStudy: "Secured a $5M federal contract for a technology consulting firm - their largest win to date."
   }
 ];
 
