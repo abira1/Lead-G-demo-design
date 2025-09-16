@@ -55,7 +55,7 @@ const Hero = () => {
       </div>
 
       {/* Centered Content Container */}
-      <div ref={containerRef} className="relative z-10 container mx-auto px-6 lg:px-16 text-center" style={{ position: 'relative' }}>
+      <div ref={containerRef} className="relative z-10 container mx-auto px-6 lg:px-16 text-center mt-8 lg:mt-0" style={{ position: 'relative' }}>
         <div className="max-w-4xl mx-auto">
           
 
