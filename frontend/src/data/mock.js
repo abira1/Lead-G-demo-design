@@ -42,23 +42,29 @@ export const servicesData = [
   {
     id: 1,
     title: "Telemarketing Excellence",
-    description: "Professional outbound calling campaigns that convert prospects into qualified leads with our proven scripts and experienced agents.",
-    features: ["Cold calling campaigns", "Lead qualification", "Appointment setting", "CRM integration"],
-    icon: "Phone"
+    description: "Professional outbound calling campaigns that convert prospects into qualified leads with our proven scripts and experienced agents. Our telemarketing team specializes in B2B lead generation across multiple industries.",
+    features: ["Cold calling campaigns", "Lead qualification", "Appointment setting", "CRM integration", "Call scripting & optimization", "Real-time reporting & analytics"],
+    icon: "Phone",
+    results: "28% average conversion rate",
+    pricing: "Starting at $2,999/month"
   },
   {
     id: 2,
     title: "Government Contracting",
-    description: "Navigate complex government procurement processes with our specialized team of government contracting experts.",
-    features: ["Proposal writing", "Compliance assistance", "Bid management", "Contract negotiation"],
-    icon: "Building"
+    description: "Navigate complex government procurement processes with our specialized team of government contracting experts. We help businesses secure lucrative federal and state contracts through strategic positioning and compliant proposal development.",
+    features: ["Proposal writing & review", "Compliance assistance", "Bid management", "Contract negotiation", "NAICS code optimization", "Past performance documentation"],
+    icon: "Building",
+    results: "$50M+ in contracts secured",
+    pricing: "Custom consulting rates"
   },
   {
     id: 3,
     title: "Social Media Marketing",
-    description: "Amplify your brand presence and generate quality leads through strategic social media campaigns and content marketing.",
-    features: ["Content creation", "Paid advertising", "Community management", "Analytics reporting"],
-    icon: "Share2"
+    description: "Amplify your brand presence and generate quality leads through strategic social media campaigns and content marketing. Our team creates engaging content that drives qualified traffic and conversions.",
+    features: ["Content creation & strategy", "Paid advertising campaigns", "Community management", "Analytics & reporting", "Lead generation funnels", "Brand positioning"],
+    icon: "Share2",
+    results: "250% average engagement increase",
+    pricing: "Starting at $1,999/month"
   }
 ];
 
