@@ -178,7 +178,53 @@ backend:
           comment: "All services running correctly: backend (RUNNING), frontend (RUNNING), mongodb (RUNNING). No errors in backend logs."
 
 frontend:
-  # Frontend testing not performed as per instructions
+  - task: "Services Dropdown Functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Header.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Need to test Services dropdown with Telemarketing (Phone icon), Gov Contracting (Building icon), Social Media (Share2 icon) items"
+
+  - task: "Industries Dropdown Functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Header.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Need to test Industries dropdown with Real Estate (Home icon), Hard Money (DollarSign icon), Solar (Zap icon), Gov Contracting (Users icon) items"
+
+  - task: "Mobile Dropdown Functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Header.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Need to test mobile dropdown functionality for both Services and Industries when browser width < 1024px"
+
+  - task: "Dropdown Styling and Effects"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Header.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Need to verify glass box styling, hover effects, proper spacing, typography, and chevron icon rotation"
 
 metadata:
   created_by: "testing_agent"
