@@ -69,6 +69,29 @@ const Header = () => {
     return () => document.removeEventListener('keydown', handleEscapeKey);
   }, []);
 
+  // Update dropdown position on scroll/resize
+  useEffect(() => {
+    const updateDropdownPosition = () => {
+      if (activeDropdown && dropdownRefs.current[activeDropdown]) {
+        const buttonElement = dropdownRefs.current[activeDropdown];
+        const rect = buttonElement.getBoundingClientRect();
+        setDropdownPosition({
+          top: rect.bottom + 8,
+          left: rect.left
+        });
+      }
+    };
+
+    if (activeDropdown) {
+      window.addEventListener('scroll', updateDropdownPosition);
+      window.addEventListener('resize', updateDropdownPosition);
+      return () => {
+        window.removeEventListener('scroll', updateDropdownPosition);
+        window.removeEventListener('resize', updateDropdownPosition);
+      };
+    }
+  }, [activeDropdown]);
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
