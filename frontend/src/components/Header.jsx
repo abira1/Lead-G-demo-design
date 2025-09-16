@@ -33,8 +33,11 @@ const Header = () => {
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = () => {
-      setActiveDropdown(null);
+    const handleClickOutside = (event) => {
+      // Only close if clicking outside the dropdown area
+      if (activeDropdown && !event.target.closest('.relative')) {
+        setActiveDropdown(null);
+      }
     };
     
     if (activeDropdown) {
@@ -42,6 +45,19 @@ const Header = () => {
       return () => document.removeEventListener('click', handleClickOutside);
     }
   }, [activeDropdown]);
+
+  // Close dropdown on escape key
+  useEffect(() => {
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape') {
+        setActiveDropdown(null);
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => document.removeEventListener('keydown', handleEscapeKey);
+  }, []);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
