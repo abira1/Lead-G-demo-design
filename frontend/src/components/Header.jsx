@@ -263,6 +263,54 @@ const Header = () => {
           </div>
         )}
       </GlassBox>
+
+      {/* Portal-based dropdown to render outside the header container */}
+      {activeDropdown && createPortal(
+        <div 
+          className="fixed w-56" 
+          data-dropdown 
+          style={{
+            zIndex: 99999,
+            position: 'fixed',
+            top: `${dropdownPosition.top}px`,
+            left: `${dropdownPosition.left}px`,
+            transform: 'translateY(0)',
+            pointerEvents: 'auto'
+          }}
+        >
+          <div style={{
+            background: 'rgba(0, 0, 0, 0.95)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '12px',
+            padding: '12px 0',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 8px 16px -4px rgba(0, 0, 0, 0.4)',
+            minWidth: '220px'
+          }}>
+            {navigationData.menuItems
+              .find(item => item.name === activeDropdown)
+              ?.dropdown?.map((subItem, index) => {
+                const IconComponent = activeDropdown === 'Services' ? serviceIcons[subItem.name] : industryIcons[subItem.name];
+                return (
+                  <a
+                    key={subItem.name}
+                    href={subItem.href}
+                    className="flex items-center space-x-3 px-5 py-3 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 text-sm font-medium group"
+                    onClick={() => setActiveDropdown(null)}
+                  >
+                    {IconComponent && (
+                      <IconComponent className="w-4 h-4 text-[#00FFD1] group-hover:scale-110 transition-transform duration-200" />
+                    )}
+                    <span>{subItem.name}</span>
+                  </a>
+                );
+              })
+            }
+          </div>
+        </div>,
+        document.body
+      )}
     </header>
   );
 };
