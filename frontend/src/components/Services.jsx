@@ -82,7 +82,10 @@ const Services = () => {
 
                   {/* Learn More Button */}
                   <div className="mt-auto">
-                    <Button className="bg-white/10 text-white border-none rounded-none px-6 py-3 text-base font-medium hover:bg-[#00FFD1] hover:text-black transition-all duration-400 min-h-[48px] flex items-center space-x-3 group w-full justify-center transform hover:scale-105 hover:shadow-lg hover:shadow-[#00FFD1]/25">
+                    <Button 
+                      onClick={() => handleLearnMore(service.title)}
+                      className="bg-white/10 text-white border-none rounded-none px-6 py-3 text-base font-medium hover:bg-[#00FFD1] hover:text-black transition-all duration-400 min-h-[48px] flex items-center space-x-3 group w-full justify-center transform hover:scale-105 hover:shadow-lg hover:shadow-[#00FFD1]/25 cursor-pointer"
+                    >
                       <span className="transition-all duration-300">Learn More</span>
                       <ArrowRight className="w-4 h-4 transition-all duration-300 group-hover:translate-x-2 group-hover:scale-110" />
                     </Button>
