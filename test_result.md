@@ -255,15 +255,18 @@ frontend:
 
   - task: "About Page Testing"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/frontend/src/components/About.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "testing"
           comment: "Need to test /about page with mission, vision, values, and company story content."
+        - working: false
+          agent: "testing"
+          comment: "❌ FAILED: About page routing issue detected. When navigating to /about, the page shows homepage content instead of About component content. Mission section found in DOM but About page heading not found. This indicates a React Router configuration problem or component rendering issue."
 
   - task: "Contact Page Testing"
     implemented: true
