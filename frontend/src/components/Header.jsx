@@ -182,9 +182,9 @@ const Header = () => {
           <div className="hidden lg:flex items-center">
             <Button 
               onClick={handleBookCall}
-              className="btn-primary bg-[#00FFD1] text-black border-none rounded-none px-5 py-2 text-sm font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[40px] cursor-pointer"
+              className="btn-primary bg-[#00FFD1] text-black border-none rounded-none px-3 py-1.5 text-xs font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[32px] cursor-pointer"
             >
-              Book Free Call
+              Book Call
             </Button>
           </div>
 
