@@ -85,9 +85,9 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="text-xl font-bold text-white tracking-tight">
+            <Link to="/" className="text-xl font-bold text-white tracking-tight hover:text-[#00FFD1] transition-colors duration-300">
               {navigationData.logo}
-            </span>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
