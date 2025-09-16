@@ -184,7 +184,8 @@ const Footer = () => {
                     <Phone className="w-4 h-4 text-[#00FFD1]" />
                   </GlassBox>
                   <div>
-                    <p className="text-white/70 font-medium text-sm">{contactData.phone}</p>
+                    <p className="text-white/70 font-medium text-sm">{contactData.phone.canada}</p>
+                    <p className="text-white/50 font-medium text-xs">{contactData.phone.bangladesh}</p>
                   </div>
                 </div>
 
@@ -194,7 +195,10 @@ const Footer = () => {
                   </GlassBox>
                   <div>
                     <p className="text-white/70 font-medium text-sm leading-relaxed">
-                      Austin, TX 78701
+                      {contactData.address.canada}
+                    </p>
+                    <p className="text-white/50 font-medium text-xs leading-relaxed">
+                      {contactData.address.bangladesh}
                     </p>
                   </div>
                 </div>
@@ -202,7 +206,7 @@ const Footer = () => {
                 {/* Business Hours */}
                 <div className="pt-3 border-t border-white/10">
                   <p className="text-xs text-white/50 font-medium">
-                    Monday - Friday: 8:00 AM - 6:00 PM CST
+                    {contactData.hours}
                   </p>
                 </div>
               </div>
