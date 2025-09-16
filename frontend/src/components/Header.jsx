@@ -113,21 +113,25 @@ const Header = () => {
                     </button>
                     {activeDropdown === item.name && (
                       <div 
-                        className="absolute top-full left-0 mt-2 w-56" 
+                        className="fixed mt-2 w-56" 
                         data-dropdown 
                         style={{
                           zIndex: 99999,
-                          position: 'absolute'
+                          position: 'fixed',
+                          top: `calc(${isScrolled ? '4rem + 1rem + 8px' : '6rem + 1rem + 8px'})`,
+                          left: `${document.querySelector(`[data-dropdown-trigger="${item.name}"]`)?.getBoundingClientRect()?.left || 0}px`,
+                          transform: 'translateY(0)'
                         }}
                       >
                         <div style={{
-                          background: 'rgba(0, 0, 0, 0.8)',
-                          backdropFilter: 'blur(16px)',
-                          WebkitBackdropFilter: 'blur(16px)',
+                          background: 'rgba(0, 0, 0, 0.9)',
+                          backdropFilter: 'blur(20px)',
+                          WebkitBackdropFilter: 'blur(20px)',
                           border: '1px solid rgba(255, 255, 255, 0.2)',
-                          borderRadius: '8px',
-                          padding: '8px 0',
-                          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.2)'
+                          borderRadius: '12px',
+                          padding: '12px 0',
+                          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 8px 16px -4px rgba(0, 0, 0, 0.3)',
+                          minWidth: '220px'
                         }}>
                           {item.dropdown.map((subItem, index) => {
                             const IconComponent = item.name === 'Services' ? serviceIcons[subItem.name] : industryIcons[subItem.name];
