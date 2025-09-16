@@ -10,6 +10,8 @@ import { ShinyCard } from './ui/shiny-card';
 import VariableProximity from './VariableProximity';
 
 const Hero = () => {
+  const containerRef = useRef(null);
+  
   return (
     <section id="home" className="relative h-screen bg-black overflow-hidden flex items-center justify-center">
       {/* Liquid Background */}
@@ -35,21 +37,47 @@ const Hero = () => {
       </div>
 
       {/* Centered Content Container */}
-      <div className="relative z-10 container mx-auto px-6 lg:px-16 text-center">
+      <div ref={containerRef} className="relative z-10 container mx-auto px-6 lg:px-16 text-center" style={{ position: 'relative' }}>
         <div className="max-w-4xl mx-auto">
           
 
 
-          {/* Main Headline - Reduced size and spacing */}
+          {/* Main Headline with Variable Proximity Effect */}
           <div className="mb-8">
             <ScrollReveal delay={0.2}>
-              <h1 className="text-4xl lg:text-6xl font-bold text-white leading-[0.9] tracking-tight">
-                Turn conversations into customers
+              <h1 className="text-4xl lg:text-6xl font-bold leading-[0.9] tracking-tight">
+                <VariableProximity
+                  label="Turn conversations into customers"
+                  className="variable-proximity-hero text-white"
+                  fromFontVariationSettings="'wght' 400, 'opsz' 9"
+                  toFontVariationSettings="'wght' 900, 'opsz' 40"
+                  containerRef={containerRef}
+                  radius={120}
+                  falloff="exponential"
+                  style={{ 
+                    display: 'block',
+                    lineHeight: '0.9',
+                    letterSpacing: '-0.025em'
+                  }}
+                />
               </h1>
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <h1 className="text-4xl lg:text-6xl font-bold leading-[0.9] tracking-tight mt-2">
-                <span className="text-[#00FFD1]">Expert outbound</span>
+                <VariableProximity
+                  label="Expert outbound"
+                  className="variable-proximity-hero text-[#00FFD1]"
+                  fromFontVariationSettings="'wght' 500, 'opsz' 12"
+                  toFontVariationSettings="'wght' 1000, 'opsz' 50"
+                  containerRef={containerRef}
+                  radius={100}
+                  falloff="gaussian"
+                  style={{ 
+                    display: 'inline',
+                    lineHeight: '0.9',
+                    letterSpacing: '-0.025em'
+                  }}
+                />
                 <span className="text-white"> that scales</span>
               </h1>
             </ScrollReveal>
