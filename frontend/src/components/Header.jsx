@@ -111,11 +111,11 @@ const Header = () => {
                       }`} />
                     </button>
                     {activeDropdown === item.name && (
-                      <div className="absolute top-full left-0 mt-2 w-56 z-50">
+                      <div className="absolute top-full left-0 mt-2 w-56 z-[100]" data-dropdown>
                         <GlassBox 
-                          className="py-2 shadow-xl"
+                          className="py-2 shadow-xl backdrop-blur-md"
                           blur={16}
-                          opacity={0.2}
+                          opacity={0.3}
                           border={true}
                         >
                           {item.dropdown.map((subItem, index) => {
