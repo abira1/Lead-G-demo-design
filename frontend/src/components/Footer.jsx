@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { navigationData, contactData } from '../data/mock';
 import { Button } from './ui/button';
 import { Mail, Phone, MapPin, ArrowRight, ExternalLink } from 'lucide-react';
