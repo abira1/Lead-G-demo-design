@@ -238,6 +238,21 @@ const Footer = () => {
             </div>
           </GlassBox>
         </ScrollReveal>
+
+        {/* Design Credit */}
+        <ScrollReveal delay={1.4}>
+          <div className="text-center pt-4">
+            <a 
+              href="https://toiral-development.web.app/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-[#00FFD1] transition-colors duration-300 font-medium text-xs flex items-center justify-center space-x-1 group"
+            >
+              <span>Design and Develop by Toiral Web Development</span>
+              <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </a>
+          </div>
+        </ScrollReveal>
       </div>
     </footer>
   );
