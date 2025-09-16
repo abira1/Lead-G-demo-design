@@ -100,15 +100,26 @@ const Footer = () => {
             >
               <h4 className="text-lg font-bold text-white mb-6">Quick Links</h4>
               <nav className="space-y-3">
-                {navigationData.menuItems.slice(0, 6).map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="flex items-center justify-between text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium group"
-                  >
-                    <span>{item.name}</span>
-                    <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </a>
+                {navigationData.menuItems.map((item) => (
+                  item.href.startsWith('/') ? (
+                    <Link
+                      key={item.name}
+                      to={item.href}
+                      className="flex items-center justify-between text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium group"
+                    >
+                      <span>{item.name}</span>
+                      <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </Link>
+                  ) : (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className="flex items-center justify-between text-sm text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium group"
+                    >
+                      <span>{item.name}</span>
+                      <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </a>
+                  )
                 ))}
               </nav>
             </GlassBox>
