@@ -11,6 +11,11 @@ const Header = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
 
+  const handleBookCall = () => {
+    // Navigate to contact page
+    window.location.href = '/contact';
+  };
+
   // Icon mapping for services and industries
   const serviceIcons = {
     "Telemarketing": Phone,
