@@ -85,12 +85,15 @@ const Pricing = () => {
           {pricingData.map((plan, index) => (
             <ScrollReveal key={plan.id} delay={0.2 * (index + 1)}>
               <GlassBox 
-                className={`relative p-8 lg:p-10 transition-all duration-500 hover:scale-[1.02] h-full flex flex-col ${
+                className={`relative p-8 lg:p-10 h-full flex flex-col cursor-pointer ${
                   plan.popular ? 'scale-105' : ''
                 }`}
                 blur={plan.popular ? 20 : 16}
                 opacity={plan.popular ? 0.2 : 0.15}
                 noise={true}
+                hover={true}
+                glow={plan.popular}
+                hoverScale={plan.popular ? 1.08 : 1.05}
               >
                 {/* Popular Badge */}
                 {plan.popular && (
