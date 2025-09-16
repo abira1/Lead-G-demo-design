@@ -2,13 +2,36 @@ import React, { useState } from 'react';
 import { pricingData } from '../data/mock';
 import { Button } from './ui/button';
 import { CheckCircle, ArrowRight, Star } from 'lucide-react';
+import LiquidEther from './LiquidEther';
 
 const Pricing = () => {
   const [billingCycle, setBillingCycle] = useState('monthly');
 
   return (
-    <section id="pricing" className="bg-black py-24 lg:py-32">
-      <div className="container mx-auto px-6 lg:px-16">
+    <section id="pricing" className="relative bg-black py-24 lg:py-32 overflow-hidden">
+      {/* Liquid Background */}
+      <div className="absolute inset-0 z-0 opacity-30">
+        <LiquidEther
+          colors={['#00FFD1', '#8E66FF', '#FF6EB4']}
+          mouseForce={15}
+          cursorSize={80}
+          isViscous={true}
+          viscous={25}
+          iterationsViscous={16}
+          iterationsPoisson={16}
+          resolution={0.4}
+          isBounce={false}
+          autoDemo={true}
+          autoSpeed={0.3}
+          autoIntensity={1.8}
+          takeoverDuration={0.4}
+          autoResumeDelay={3000}
+          autoRampDuration={1.0}
+          style={{ width: '100%', height: '100%' }}
+        />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-6 lg:px-16">
         {/* Section Header */}
         <div className="text-center mb-20">
           <h2 className="text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight mb-6">
