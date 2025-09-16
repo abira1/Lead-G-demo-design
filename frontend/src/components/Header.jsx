@@ -261,17 +261,7 @@ const Header = () => {
                     )}
                   </div>
                 ))}
-                <div className="pt-4 border-t border-white/10">
-                  <Button 
-                    onClick={() => {
-                      handleBookCall();
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="w-full btn-primary bg-[#00FFD1] text-black border-none rounded-lg px-4 py-2 text-sm font-medium hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] transition-all duration-400 min-h-[36px] cursor-pointer"
-                  >
-                    Book Call
-                  </Button>
-                </div>
+                {/* Mobile CTA Button removed as requested */}
               </nav>
             </GlassBox>
           </div>
