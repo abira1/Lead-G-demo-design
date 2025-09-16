@@ -42,7 +42,7 @@ const Header = () => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       // Only close if clicking outside the dropdown area
-      if (activeDropdown && !event.target.closest('.relative')) {
+      if (activeDropdown && !event.target.closest('[data-dropdown]') && !event.target.closest('button')) {
         setActiveDropdown(null);
       }
     };
