@@ -70,11 +70,32 @@ module.exports = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'float': {
+  				'0%, 100%': { transform: 'translateY(0px)' },
+  				'50%': { transform: 'translateY(-10px)' }
+  			},
+  			'glow': {
+  				'0%, 100%': { boxShadow: '0 0 20px rgba(0, 255, 209, 0.2)' },
+  				'50%': { boxShadow: '0 0 30px rgba(0, 255, 209, 0.4)' }
+  			},
+  			'shimmer': {
+  				'0%': { transform: 'translateX(-100%)' },
+  				'100%': { transform: 'translateX(100%)' }
+  			},
+  			'pulse-border': {
+  				'0%': { borderColor: 'rgba(255, 255, 255, 0.1)' },
+  				'50%': { borderColor: 'rgba(0, 255, 209, 0.5)' },
+  				'100%': { borderColor: 'rgba(255, 255, 255, 0.1)' }
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'float': 'float 3s ease-in-out infinite',
+  			'glow': 'glow 2s ease-in-out infinite',
+  			'shimmer': 'shimmer 1.5s ease-in-out',
+  			'pulse-border': 'pulse-border 2s ease-in-out infinite'
   		}
   	}
   },
