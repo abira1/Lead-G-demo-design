@@ -90,7 +90,7 @@ const Pricing = () => {
                 }`}
                 blur={plan.popular ? 20 : 16}
                 opacity={plan.popular ? 0.2 : 0.15}
-                noise={true}
+                noise={false}
                 hover={true}
                 glow={plan.popular}
                 hoverScale={plan.popular ? 1.08 : 1.05}
