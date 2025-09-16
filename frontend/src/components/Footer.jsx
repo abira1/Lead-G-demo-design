@@ -226,15 +226,15 @@ const Footer = () => {
             </div>
 
             <div className="flex items-center space-x-6">
-              <a href="/privacy" className="text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium text-sm">
+              <Link to="/privacy-policy" className="text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium text-sm">
                 Privacy Policy
-              </a>
-              <a href="/terms" className="text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium text-sm">
+              </Link>
+              <Link to="/terms-of-service" className="text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium text-sm">
                 Terms of Service
-              </a>
-              <a href="/cookies" className="text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium text-sm">
-                Cookie Policy
-              </a>
+              </Link>
+              <Link to="/contact" className="text-white/60 hover:text-[#00FFD1] transition-colors duration-300 font-medium text-sm">
+                Contact Us
+              </Link>
             </div>
           </GlassBox>
         </ScrollReveal>
