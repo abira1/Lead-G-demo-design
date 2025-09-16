@@ -147,10 +147,10 @@ const Pricing = () => {
                 {/* CTA Button */}
                 <div className="mt-auto">
                   <Button 
-                    className={`w-full transition-all duration-400 min-h-[48px] flex items-center justify-center space-x-3 text-base font-medium border-none rounded-none ${
+                    className={`w-full min-h-[48px] flex items-center justify-center space-x-3 text-base font-medium border-none rounded-none transition-all duration-500 transform hover:scale-105 hover:shadow-lg ${
                       plan.popular
-                        ? 'bg-[#00FFD1] text-black hover:bg-[#00FFD1]/10 hover:text-[#00FFD1]'
-                        : 'bg-white/10 text-white hover:bg-white hover:text-black'
+                        ? 'bg-[#00FFD1] text-black hover:bg-[#00FFD1]/90 hover:shadow-[#00FFD1]/30 hover:text-black'
+                        : 'bg-white/10 text-white hover:bg-[#00FFD1] hover:text-black hover:shadow-[#00FFD1]/25'
                     }`}
                   >
                     <span>
