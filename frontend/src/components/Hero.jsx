@@ -12,6 +12,24 @@ import VariableProximity from './VariableProximity';
 const Hero = () => {
   const containerRef = useRef(null);
   
+  const handleBookCall = () => {
+    // Navigate to contact page or scroll to contact section
+    const contactSection = document.querySelector('#contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.location.href = '/contact';
+    }
+  };
+
+  const handleSeePricing = () => {
+    // Scroll to pricing section
+    const pricingSection = document.getElementById('pricing');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+  
   return (
     <section id="home" className="relative h-screen bg-black overflow-hidden flex items-center justify-center">
       {/* Liquid Background */}
