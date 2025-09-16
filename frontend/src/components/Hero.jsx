@@ -6,6 +6,7 @@ import { ArrowRight, Phone } from 'lucide-react';
 import LiquidEther from './LiquidEther';
 import ScrollReveal from './ScrollReveal';
 import GlassBox from './GlassBox';
+import { ShinyCard } from './ui/shiny-card';
 
 const Hero = () => {
   return (
