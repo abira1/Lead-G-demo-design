@@ -43,6 +43,7 @@ const Services = () => {
                   noise={false}
                   hover={true}
                   glow={true}
+                  shine={true}
                   hoverScale={1.05}
                 >
                   
