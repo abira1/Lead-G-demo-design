@@ -129,47 +129,7 @@ const Header = () => {
                         activeDropdown === item.name ? 'rotate-180' : ''
                       }`} />
                     </button>
-                    {activeDropdown === item.name && (
-                      <div 
-                        className="fixed w-56" 
-                        data-dropdown 
-                        style={{
-                          zIndex: 99999,
-                          position: 'fixed',
-                          top: `${dropdownPosition.top}px`,
-                          left: `${dropdownPosition.left}px`,
-                          transform: 'translateY(0)'
-                        }}
-                      >
-                        <div style={{
-                          background: 'rgba(0, 0, 0, 0.9)',
-                          backdropFilter: 'blur(20px)',
-                          WebkitBackdropFilter: 'blur(20px)',
-                          border: '1px solid rgba(255, 255, 255, 0.2)',
-                          borderRadius: '12px',
-                          padding: '12px 0',
-                          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 8px 16px -4px rgba(0, 0, 0, 0.3)',
-                          minWidth: '220px'
-                        }}>
-                          {item.dropdown.map((subItem, index) => {
-                            const IconComponent = item.name === 'Services' ? serviceIcons[subItem.name] : industryIcons[subItem.name];
-                            return (
-                              <a
-                                key={subItem.name}
-                                href={subItem.href}
-                                className="flex items-center space-x-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 text-sm font-medium group"
-                                onClick={() => setActiveDropdown(null)}
-                              >
-                                {IconComponent && (
-                                  <IconComponent className="w-4 h-4 text-[#00FFD1] group-hover:scale-110 transition-transform duration-200" />
-                                )}
-                                <span>{subItem.name}</span>
-                              </a>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    )}
+                    {/* Dropdown will be rendered via portal below */}
                   </>
                 ) : (
                   item.href.startsWith('/') ? (
