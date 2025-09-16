@@ -192,6 +192,9 @@ frontend:
         - working: true
           agent: "testing"
           comment: "✅ PASSED: Mobile Services dropdown tested successfully. All items visible: Telemarketing (with Phone icon), Gov Contracting (with Building icon), Social Media (with Share2 icon). Dropdown opens/closes correctly. Desktop functionality confirmed through code review and styling verification."
+        - working: true
+          agent: "testing"
+          comment: "✅ DESKTOP DROPDOWN CONFIRMED WORKING: Tested desktop Services dropdown at 1920x800 viewport. Services button found and clickable. After clicking, Telemarketing links became visible (2 found), confirming dropdown functionality is working. All expected items (Telemarketing, Gov Contracting, Social Media) are present in dropdown structure."
 
   - task: "Industries Dropdown Functionality"
     implemented: true
