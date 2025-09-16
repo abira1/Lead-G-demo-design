@@ -184,7 +184,7 @@ const Header = () => {
               border={true}
             >
               <nav className="space-y-2">
-                {navigationData.menuItems.slice(0, 6).map((item) => (
+                {navigationData.menuItems.map((item) => (
                   <div key={item.name}>
                     {item.dropdown ? (
                       <div>
@@ -222,13 +222,27 @@ const Header = () => {
                         )}
                       </div>
                     ) : (
-                      <a
-                        href={item.href}
-                        className="block text-white/70 hover:text-white transition-colors duration-300 py-3 px-2 text-sm font-medium rounded-lg hover:bg-white/5"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </a>
+                      item.href.startsWith('/') ? (
+                        <Link
+                          to={item.href}
+                          className={`block py-3 px-2 text-sm font-medium rounded-lg transition-colors duration-300 ${
+                            location.pathname === item.href 
+                              ? 'text-[#00FFD1] bg-white/10' 
+                              : 'text-white/70 hover:text-white hover:bg-white/5'
+                          }`}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </Link>
+                      ) : (
+                        <a
+                          href={item.href}
+                          className="block text-white/70 hover:text-white transition-colors duration-300 py-3 px-2 text-sm font-medium rounded-lg hover:bg-white/5"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </a>
+                      )
                     )}
                   </div>
                 ))}
