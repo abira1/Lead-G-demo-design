@@ -92,7 +92,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
-            {navigationData.menuItems.slice(0, 6).map((item) => (
+            {navigationData.menuItems.map((item) => (
               <div key={item.name} className="relative">
                 {item.dropdown ? (
                   <>
@@ -134,12 +134,25 @@ const Header = () => {
                     )}
                   </>
                 ) : (
-                  <a
-                    href={item.href}
-                    className="text-white/70 hover:text-white transition-colors duration-300 text-sm font-medium py-2 px-4 rounded-lg hover:bg-white/5"
-                  >
-                    {item.name}
-                  </a>
+                  item.href.startsWith('/') ? (
+                    <Link
+                      to={item.href}
+                      className={`text-sm font-medium py-2 px-4 rounded-lg transition-colors duration-300 ${
+                        location.pathname === item.href 
+                          ? 'text-[#00FFD1] bg-white/10' 
+                          : 'text-white/70 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <a
+                      href={item.href}
+                      className="text-white/70 hover:text-white transition-colors duration-300 text-sm font-medium py-2 px-4 rounded-lg hover:bg-white/5"
+                    >
+                      {item.name}
+                    </a>
+                  )
                 )}
               </div>
             ))}
