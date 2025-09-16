@@ -9,6 +9,22 @@ import Pricing from "./components/Pricing";
 import CaseStudies from "./components/CaseStudies";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsOfService from "./components/TermsOfService";
+
+// Home Page Component
+const HomePage = () => (
+  <>
+    <Hero />
+    <Services />
+    <Industries />
+    <Pricing />
+    <CaseStudies />
+    <FAQ />
+  </>
+);
 
 function App() {
   return (
@@ -16,17 +32,15 @@ function App() {
       <BrowserRouter>
         <Header />
         <main>
-          <Hero />
-          <Services />
-          <Industries />
-          <Pricing />
-          <CaseStudies />
-          <FAQ />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+          </Routes>
         </main>
         <Footer />
-        <Routes>
-          <Route path="/" element={<></>} />
-        </Routes>
       </BrowserRouter>
     </div>
   );
