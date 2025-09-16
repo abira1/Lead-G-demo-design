@@ -16,6 +16,66 @@ code {
         monospace;
 }
 
+/* Modern card animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 209, 0.2); }
+  50% { box-shadow: 0 0 30px rgba(0, 255, 209, 0.4); }
+}
+
+@keyframes pulse-border {
+  0% { border-color: rgba(255, 255, 255, 0.1); }
+  50% { border-color: rgba(0, 255, 209, 0.5); }
+  100% { border-color: rgba(255, 255, 255, 0.1); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.glass-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease-in-out;
+}
+
+.glass-shimmer:hover::before {
+  left: 100%;
+}
+
+/* Smooth hardware acceleration */
+.smooth-transform {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Enhanced gradient backgrounds */
+.bg-gradient-radial {
+  background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+}
+
+/* Custom utilities for glass effects */
+.backdrop-blur-strong {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.backdrop-blur-ultra {
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
 
 
 @layer base {
