@@ -98,7 +98,7 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navigationData.menuItems.map((item) => (
-              <div key={item.name} className="relative">
+              <div key={item.name} className="relative" data-dropdown>
                 {item.dropdown ? (
                   <>
                     <button
