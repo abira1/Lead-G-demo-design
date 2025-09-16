@@ -1,0 +1,266 @@
+// Mock data for Lead G - Global Lead Generation & Marketing Agency
+
+export const heroData = {
+  headline: "Turn conversations into customers — expert outbound that scales.",
+  tagline: "Lead G — Your global partner in telemarketing, marketing, and government contracting support.",
+  credibility: "Since 2017 • 500+ meetings booked • Avg. 28% qualified conversion",
+  primaryCTA: "Book a Free Call",
+  secondaryCTA: "See Pricing"
+};
+
+export const navigationData = {
+  logo: "Lead G",
+  menuItems: [
+    { name: "Home", href: "#home" },
+    { 
+      name: "Services", 
+      href: "#services",
+      dropdown: [
+        { name: "Telemarketing", href: "#telemarketing" },
+        { name: "Gov Contracting", href: "#government" },
+        { name: "Social Media", href: "#social-media" }
+      ]
+    },
+    { 
+      name: "Industries", 
+      href: "#industries",
+      dropdown: [
+        { name: "Real Estate", href: "#real-estate" },
+        { name: "Hard Money", href: "#hard-money" },
+        { name: "Solar", href: "#solar" },
+        { name: "Gov Contracting", href: "#gov-contracting" }
+      ]
+    },
+    { name: "Pricing", href: "#pricing" },
+    { name: "Case Studies", href: "#case-studies" },
+    { name: "About", href: "#about" },
+    { name: "Contact", href: "#contact" },
+    { name: "News/Blog", href: "#news" }
+  ]
+};
+
+export const servicesData = [
+  {
+    id: 1,
+    title: "Telemarketing Excellence",
+    description: "Professional outbound calling campaigns that convert prospects into qualified leads with our proven scripts and experienced agents.",
+    features: ["Cold calling campaigns", "Lead qualification", "Appointment setting", "CRM integration"],
+    icon: "Phone"
+  },
+  {
+    id: 2,
+    title: "Government Contracting",
+    description: "Navigate complex government procurement processes with our specialized team of government contracting experts.",
+    features: ["Proposal writing", "Compliance assistance", "Bid management", "Contract negotiation"],
+    icon: "Building"
+  },
+  {
+    id: 3,
+    title: "Social Media Marketing",
+    description: "Amplify your brand presence and generate quality leads through strategic social media campaigns and content marketing.",
+    features: ["Content creation", "Paid advertising", "Community management", "Analytics reporting"],
+    icon: "Share2"
+  }
+];
+
+export const industriesData = [
+  {
+    name: "Real Estate",
+    description: "Specialized lead generation for real estate professionals, investors, and agencies.",
+    metrics: "45% increase in qualified leads"
+  },
+  {
+    name: "Hard Money Lending",
+    description: "Connect hard money lenders with qualified borrowers and investment opportunities.",
+    metrics: "60% faster deal closure"
+  },
+  {
+    name: "Solar Energy",
+    description: "Generate high-quality leads for solar installation and renewable energy companies.",
+    metrics: "35% conversion improvement"
+  },
+  {
+    name: "Government Contracting",
+    description: "Help businesses secure lucrative government contracts and navigate procurement.",
+    metrics: "$2M+ in contracts secured"
+  }
+];
+
+export const pricingData = [
+  {
+    id: 1,
+    name: "Starter",
+    price: "$2,999",
+    period: "month",
+    description: "Perfect for small businesses getting started with outbound lead generation.",
+    features: [
+      "100 qualified leads/month",
+      "Basic telemarketing campaigns",
+      "Email & phone support",
+      "Monthly reporting",
+      "CRM integration"
+    ],
+    popular: false
+  },
+  {
+    id: 2,
+    name: "Growth",
+    price: "$5,999",
+    period: "month",
+    description: "Ideal for growing companies ready to scale their lead generation efforts.",
+    features: [
+      "300 qualified leads/month",
+      "Multi-channel campaigns",
+      "Dedicated account manager",
+      "Weekly reporting",
+      "Advanced CRM integration",
+      "Social media campaigns"
+    ],
+    popular: true
+  },
+  {
+    id: 3,
+    name: "Enterprise",
+    price: "Custom",
+    period: "month",
+    description: "Tailored solutions for large organizations with complex requirements.",
+    features: [
+      "Unlimited qualified leads",
+      "Custom campaign strategies",
+      "Dedicated team",
+      "Real-time reporting",
+      "Full-service management",
+      "Government contracting support"
+    ],
+    popular: false
+  }
+];
+
+export const caseStudiesData = [
+  {
+    id: 1,
+    title: "Solar Company Scales to $10M Revenue",
+    industry: "Solar Energy",
+    result: "250% increase in qualified leads",
+    description: "How we helped a regional solar company expand nationwide through strategic telemarketing and digital campaigns.",
+    metrics: {
+      leads: "2,500+ qualified leads/month",
+      conversion: "28% conversion rate",
+      revenue: "$10M annual revenue"
+    }
+  },
+  {
+    id: 2,
+    title: "Real Estate Firm Doubles Listings",
+    industry: "Real Estate",
+    result: "120% increase in property listings",
+    description: "Transforming a traditional real estate firm's lead generation with modern outbound strategies.",
+    metrics: {
+      leads: "800+ qualified leads/month",
+      conversion: "32% conversion rate",
+      revenue: "$3.2M in commissions"
+    }
+  },
+  {
+    id: 3,
+    title: "Government Contractor Wins $5M Deal",
+    industry: "Government",
+    result: "$5M contract secured",
+    description: "Strategic government contracting support that resulted in the largest contract win in company history.",
+    metrics: {
+      proposals: "15 successful bids",
+      conversion: "75% bid success rate",
+      revenue: "$5M contract value"
+    }
+  }
+];
+
+export const testimonialsData = [
+  {
+    id: 1,
+    name: "Sarah Mitchell",
+    title: "CEO, SolarMax Solutions",
+    company: "SolarMax Solutions",
+    quote: "Lead G transformed our business completely. We went from struggling to find leads to having more qualified prospects than we could handle. Their telemarketing team is simply outstanding.",
+    avatar: "/api/placeholder/64/64"
+  },
+  {
+    id: 2,
+    name: "Michael Rodriguez",
+    title: "Director of Sales, PropertyPro Realty",
+    company: "PropertyPro Realty",
+    quote: "The ROI we've seen with Lead G is incredible. Their systematic approach to lead generation has doubled our listings and tripled our revenue in just 8 months.",
+    avatar: "/api/placeholder/64/64"
+  },
+  {
+    id: 3,
+    name: "Jennifer Chen",
+    title: "President, TechForward Contracting",
+    company: "TechForward Contracting",
+    quote: "Their government contracting expertise is unmatched. Lead G helped us navigate complex procurement processes and win our largest contract to date - $5M!",
+    avatar: "/api/placeholder/64/64"
+  }
+];
+
+export const faqData = [
+  {
+    id: 1,
+    question: "How quickly can you start generating leads for my business?",
+    answer: "We can typically launch your first campaign within 5-7 business days after onboarding. This includes strategy development, script creation, and team training specific to your industry and target audience."
+  },
+  {
+    id: 2,
+    question: "What industries do you specialize in?",
+    answer: "We specialize in Real Estate, Hard Money Lending, Solar Energy, and Government Contracting. However, our experienced team has successfully worked with businesses across various industries including healthcare, technology, and financial services."
+  },
+  {
+    id: 3,
+    question: "How do you ensure lead quality?",
+    answer: "We use a multi-step qualification process that includes pre-call research, structured questioning, and verification protocols. Each lead is scored and validated before being delivered to ensure they meet your specific criteria."
+  },
+  {
+    id: 4,
+    question: "Can you integrate with our existing CRM?",
+    answer: "Yes, we integrate with all major CRM systems including Salesforce, HubSpot, Pipedrive, and custom solutions. This ensures seamless lead transfer and tracking throughout your sales process."
+  },
+  {
+    id: 5,
+    question: "What's your average conversion rate?",
+    answer: "Our average qualification rate is 28%, significantly higher than industry standards. However, conversion rates vary by industry and specific campaign objectives. We provide detailed analytics to track and optimize performance."
+  },
+  {
+    id: 6,
+    question: "Do you offer government contracting support?",
+    answer: "Absolutely. Our government contracting division specializes in proposal writing, compliance assistance, bid management, and contract negotiation. We've helped clients secure over $50M in government contracts."
+  }
+];
+
+export const contactData = {
+  email: "hello@leadg.com",
+  phone: "+1 (555) 123-4567",
+  address: "123 Business Center Dr, Suite 100, Austin, TX 78701",
+  hours: "Monday - Friday: 8:00 AM - 6:00 PM CST"
+};
+
+export const statsData = [
+  {
+    label: "Qualified Leads Generated",
+    value: "50,000+",
+    suffix: ""
+  },
+  {
+    label: "Client Success Rate",
+    value: "96",
+    suffix: "%"
+  },
+  {
+    label: "Average Conversion Rate",
+    value: "28",
+    suffix: "%"
+  },
+  {
+    label: "Years of Experience",
+    value: "8",
+    suffix: "+"
+  }
+];
