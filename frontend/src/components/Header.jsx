@@ -105,6 +105,7 @@ const Header = () => {
                     <button
                       className="flex items-center space-x-1 text-white/70 hover:text-white transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/5"
                       onClick={(e) => handleDropdownToggle(item.name, e)}
+                      data-dropdown-trigger={item.name}
                     >
                       <span className="text-sm font-medium">{item.name}</span>
                       <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
