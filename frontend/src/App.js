@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
@@ -29,7 +29,7 @@ const HomePage = () => (
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router>
         <Header />
         <main>
           <Routes>
@@ -41,7 +41,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
