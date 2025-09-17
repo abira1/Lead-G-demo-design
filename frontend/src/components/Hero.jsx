@@ -69,20 +69,7 @@ const Hero = () => {
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <h1 className="text-4xl lg:text-6xl font-bold leading-[0.9] tracking-tight mt-2">
-                <VariableProximity
-                  label="Expert outbound"
-                  className="variable-proximity-hero text-[#00FFD1]"
-                  fromFontVariationSettings="'wght' 500, 'opsz' 12"
-                  toFontVariationSettings="'wght' 1000, 'opsz' 50"
-                  containerRef={containerRef}
-                  radius={100}
-                  falloff="gaussian"
-                  style={{ 
-                    display: 'inline',
-                    lineHeight: '0.9',
-                    letterSpacing: '-0.025em'
-                  }}
-                />
+                <span className="text-[#00FFD1]">Expert outbound</span>
                 <span className="text-white"> that scales</span>
               </h1>
             </ScrollReveal>
