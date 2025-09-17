@@ -11,9 +11,6 @@ firebase-admin==6.5.0
 pydantic==2.10.5
 email-validator==2.2.0
 
-# CORS and Middleware
-starlette==0.42.0
-
 # Date and Time
 python-dateutil==2.9.0
 
