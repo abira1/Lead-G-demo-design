@@ -1,272 +1,457 @@
 import React, { useState } from 'react';
-import { contactData, contactFormFields } from '../data/mock';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { contactData } from '../data/mock';
+import { Button } from './ui/button';
 import ScrollReveal from './ScrollReveal';
 import GlassBox from './GlassBox';
-import { Button } from './ui/button';
+import apiService from '../services/api';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('idle'); // idle, loading, success, error
+  const [submitMessage, setSubmitMessage] = useState('');
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+    watch
+  } = useForm({
+    defaultValues: {
+      first_name: '',
+      last_name: '',
+      email: '',
+      phone: '',
+      company: '',
+      industry: '',
+      service: '',
+      message: ''
+    }
+  });
+
+  const onSubmit = async (data) => {
+    setSubmitStatus('loading');
+    setSubmitMessage('');
+
+    try {
+      // Submit form data to Firebase via API
+      const response = await apiService.submitContactForm(data);
+      
+      if (response) {
+        setSubmitStatus('success');
+        setSubmitMessage('Thank you for your message! We\'ll get back to you within 24 hours.');
+        reset(); // Clear form
+        
+        // Reset status after 5 seconds
+        setTimeout(() => {
+          setSubmitStatus('idle');
+          setSubmitMessage('');
+        }, 5000);
+      }
+    } catch (error) {
+      console.error('Contact form submission error:', error);
+      setSubmitStatus('error');
+      setSubmitMessage(
+        error.message || 'Sorry, there was an error sending your message. Please try again.'
+      );
+      
+      // Reset error status after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus('idle');
+        setSubmitMessage('');
+      }, 5000);
+    }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const isFormValid = () => {
+    const formData = watch();
+    return formData.first_name && 
+           formData.last_name && 
+           formData.email && 
+           formData.message &&
+           !errors.email;
+  };
+
+  const getSubmitButtonContent = () => {
+    switch (submitStatus) {
+      case 'loading':
+        return (
+          <>
+            <Loader2 className="w-5 h-5 animate-spin" />
+            <span>Sending...</span>
+          </>
+        );
+      case 'success':
+        return (
+          <>
+            <CheckCircle className="w-5 h-5" />
+            <span>Message Sent!</span>
+          </>
+        );
+      case 'error':
+        return (
+          <>
+            <AlertCircle className="w-5 h-5" />
+            <span>Try Again</span>
+          </>
+        );
+      default:
+        return (
+          <>
+            <Send className="w-5 h-5" />
+            <span>Send Message</span>
+          </>
+        );
+    }
+  };
+
+  const getSubmitButtonClass = () => {
+    const baseClass = "w-full flex items-center justify-center space-x-2 px-8 py-4 text-lg font-medium transition-all duration-400 rounded-none";
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({});
-    }, 3000);
+    switch (submitStatus) {
+      case 'loading':
+        return `${baseClass} bg-gray-500 text-white cursor-not-allowed`;
+      case 'success':
+        return `${baseClass} bg-green-500 text-white`;
+      case 'error':
+        return `${baseClass} bg-red-500 text-white hover:bg-red-600`;
+      default:
+        return `${baseClass} bg-[#00FFD1] text-black hover:bg-[#00FFD1]/10 hover:text-[#00FFD1] border-none ${
+          !isFormValid() ? 'opacity-50 cursor-not-allowed' : ''
+        }`;
+    }
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0A0B1E] via-[#1A1B3E] to-[#0A0B1E]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(120,119,198,0.3),transparent_50%)] pointer-events-none"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(0,255,209,0.1),transparent_50%)] pointer-events-none"></div>
-
-      <div className="container mx-auto px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <ScrollReveal>
-          <div className="text-center mb-16 lg:mb-20">
-            <h2 className="text-5xl lg:text-7xl font-bold text-white leading-tight tracking-tight mb-6">
-              Get In <span className="bg-gradient-to-r from-[#00FFD1] to-[#7B68EE] bg-clip-text text-transparent">Touch</span>
-            </h2>
-            <p className="text-lg text-white/60 font-medium max-w-3xl mx-auto">
-              Ready to transform your lead generation? Let's discuss how we can help your business grow.
+    <div className="min-h-screen bg-black pt-24 pb-16">
+      <div className="container mx-auto px-6 lg:px-16">
+        
+        {/* Header */}
+        <ScrollReveal delay={0.2}>
+          <div className="text-center mb-16">
+            <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+              Get In <span className="text-[#00FFD1]">Touch</span>
+            </h1>
+            <p className="text-lg text-white/70 max-w-3xl mx-auto leading-relaxed">
+              Ready to transform your business with expert lead generation? 
+              Let's discuss how we can help you achieve your growth goals.
             </p>
           </div>
         </ScrollReveal>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Contact Information */}
-          <ScrollReveal delay={0.2}>
-            <div className="space-y-8">
-              <h3 className="text-3xl font-bold text-white mb-8">Contact Information</h3>
-              
-              {/* Office Locations */}
-              <div className="space-y-6">
-                <GlassBox className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <MapPin className="w-6 h-6 text-[#00FFD1] mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">Canada Office</h4>
-                      <p className="text-white/70">{contactData.address.canada}</p>
-                    </div>
-                  </div>
-                </GlassBox>
-
-                <GlassBox className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <MapPin className="w-6 h-6 text-[#00FFD1] mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">Bangladesh Office</h4>
-                      <p className="text-white/70">{contactData.address.bangladesh}</p>
-                    </div>
-                  </div>
-                </GlassBox>
+        {/* Contact Form and Info Grid */}
+        <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+          
+          {/* Contact Form */}
+          <ScrollReveal delay={0.4}>
+            <GlassBox 
+              className="p-8 lg:p-12"
+              blur={20}
+              opacity={0.1}
+            >
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-white mb-4">Send us a message</h2>
+                <p className="text-white/60">
+                  Fill out the form below and we'll get back to you within 24 hours.
+                </p>
               </div>
 
-              {/* Phone Numbers */}
-              <GlassBox className="p-6">
-                <div className="flex items-start space-x-4">
-                  <Phone className="w-6 h-6 text-[#00FFD1] mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Phone Numbers</h4>
-                    <p className="text-white/70 mb-1">Canada/USA: {contactData.phone.canada}</p>
-                    <p className="text-white/70">Bangladesh: {contactData.phone.bangladesh}</p>
+              {/* Status Message */}
+              {submitMessage && (
+                <div className={`mb-6 p-4 rounded-lg border ${
+                  submitStatus === 'success' 
+                    ? 'bg-green-500/10 border-green-500/20 text-green-400' 
+                    : 'bg-red-500/10 border-red-500/20 text-red-400'
+                }`}>
+                  <div className="flex items-center space-x-2">
+                    {submitStatus === 'success' ? (
+                      <CheckCircle className="w-5 h-5" />
+                    ) : (
+                      <AlertCircle className="w-5 h-5" />
+                    )}
+                    <span className="text-sm font-medium">{submitMessage}</span>
                   </div>
                 </div>
-              </GlassBox>
+              )}
 
-              {/* Email */}
-              <GlassBox className="p-6">
-                <div className="flex items-start space-x-4">
-                  <Mail className="w-6 h-6 text-[#00FFD1] mt-1 flex-shrink-0" />
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                
+                {/* Name Fields */}
+                <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Email</h4>
-                    <p className="text-white/70">{contactData.email}</p>
+                    <label className="block text-sm font-medium text-white/80 mb-2">
+                      First Name *
+                    </label>
+                    <input
+                      {...register('first_name', { 
+                        required: 'First name is required',
+                        minLength: { value: 2, message: 'First name must be at least 2 characters' }
+                      })}
+                      type="text"
+                      className="w-full bg-white/5 border border-white/20 text-white placeholder-white/40 px-4 py-3 focus:outline-none focus:border-[#00FFD1] focus:bg-white/10 transition-all duration-300 rounded-none"
+                      placeholder="John"
+                      disabled={isSubmitting}
+                    />
+                    {errors.first_name && (
+                      <p className="text-red-400 text-sm mt-1">{errors.first_name.message}</p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-white/80 mb-2">
+                      Last Name *
+                    </label>
+                    <input
+                      {...register('last_name', { 
+                        required: 'Last name is required',
+                        minLength: { value: 2, message: 'Last name must be at least 2 characters' }
+                      })}
+                      type="text"
+                      className="w-full bg-white/5 border border-white/20 text-white placeholder-white/40 px-4 py-3 focus:outline-none focus:border-[#00FFD1] focus:bg-white/10 transition-all duration-300 rounded-none"
+                      placeholder="Doe"
+                      disabled={isSubmitting}
+                    />
+                    {errors.last_name && (
+                      <p className="text-red-400 text-sm mt-1">{errors.last_name.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="block text-sm font-medium text-white/80 mb-2">
+                    Email Address *
+                  </label>
+                  <input
+                    {...register('email', { 
+                      required: 'Email is required',
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: 'Please enter a valid email address'
+                      }
+                    })}
+                    type="email"
+                    className="w-full bg-white/5 border border-white/20 text-white placeholder-white/40 px-4 py-3 focus:outline-none focus:border-[#00FFD1] focus:bg-white/10 transition-all duration-300 rounded-none"
+                    placeholder="john@company.com"
+                    disabled={isSubmitting}
+                  />
+                  {errors.email && (
+                    <p className="text-red-400 text-sm mt-1">{errors.email.message}</p>
+                  )}
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label className="block text-sm font-medium text-white/80 mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    {...register('phone')}
+                    type="tel"
+                    className="w-full bg-white/5 border border-white/20 text-white placeholder-white/40 px-4 py-3 focus:outline-none focus:border-[#00FFD1] focus:bg-white/10 transition-all duration-300 rounded-none"
+                    placeholder="+1 (555) 123-4567"
+                    disabled={isSubmitting}
+                  />
+                </div>
+
+                {/* Company and Industry */}
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-white/80 mb-2">
+                      Company
+                    </label>
+                    <input
+                      {...register('company')}
+                      type="text"
+                      className="w-full bg-white/5 border border-white/20 text-white placeholder-white/40 px-4 py-3 focus:outline-none focus:border-[#00FFD1] focus:bg-white/10 transition-all duration-300 rounded-none"
+                      placeholder="Your Company"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-white/80 mb-2">
+                      Industry
+                    </label>
+                    <select
+                      {...register('industry')}
+                      className="w-full bg-white/5 border border-white/20 text-white px-4 py-3 focus:outline-none focus:border-[#00FFD1] focus:bg-white/10 transition-all duration-300 rounded-none"
+                      disabled={isSubmitting}
+                    >
+                      <option value="">Select Industry</option>
+                      <option value="real-estate">Real Estate</option>
+                      <option value="hard-money">Hard Money Lending</option>
+                      <option value="solar">Solar Energy</option>
+                      <option value="government">Government Contracting</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Service Interest */}
+                <div>
+                  <label className="block text-sm font-medium text-white/80 mb-2">
+                    Service Interest
+                  </label>
+                  <select
+                    {...register('service')}
+                    className="w-full bg-white/5 border border-white/20 text-white px-4 py-3 focus:outline-none focus:border-[#00FFD1] focus:bg-white/10 transition-all duration-300 rounded-none"
+                    disabled={isSubmitting}
+                  >
+                    <option value="">Select Service</option>
+                    <option value="telemarketing">Telemarketing</option>
+                    <option value="government-contracting">Government Contracting</option>
+                    <option value="social-media">Social Media Marketing</option>
+                    <option value="consultation">Strategy Consultation</option>
+                  </select>
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label className="block text-sm font-medium text-white/80 mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    {...register('message', { 
+                      required: 'Message is required',
+                      minLength: { value: 10, message: 'Message must be at least 10 characters' }
+                    })}
+                    rows={5}
+                    className="w-full bg-white/5 border border-white/20 text-white placeholder-white/40 px-4 py-3 focus:outline-none focus:border-[#00FFD1] focus:bg-white/10 transition-all duration-300 rounded-none resize-vertical"
+                    placeholder="Tell us about your project and how we can help..."
+                    disabled={isSubmitting}
+                  />
+                  {errors.message && (
+                    <p className="text-red-400 text-sm mt-1">{errors.message.message}</p>
+                  )}
+                </div>
+
+                {/* Submit Button */}
+                <Button
+                  type="submit"
+                  disabled={isSubmitting || !isFormValid() || submitStatus === 'success'}
+                  className={getSubmitButtonClass()}
+                >
+                  {getSubmitButtonContent()}
+                </Button>
+              </form>
+            </GlassBox>
+          </ScrollReveal>
+
+          {/* Contact Information */}
+          <ScrollReveal delay={0.6}>
+            <div className="space-y-8">
+              
+              {/* Contact Details */}
+              <GlassBox 
+                className="p-8"
+                blur={16}
+                opacity={0.1}
+              >
+                <h3 className="text-xl font-bold text-white mb-6">Contact Information</h3>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <GlassBox className="w-12 h-12 rounded-none flex items-center justify-center flex-shrink-0" opacity={0.2}>
+                      <Mail className="w-5 h-5 text-[#00FFD1]" />
+                    </GlassBox>
+                    <div>
+                      <h4 className="text-white font-medium mb-1">Email</h4>
+                      <a 
+                        href={`mailto:${contactData.email}`}
+                        className="text-white/70 hover:text-[#00FFD1] transition-colors duration-300"
+                      >
+                        {contactData.email}
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <GlassBox className="w-12 h-12 rounded-none flex items-center justify-center flex-shrink-0" opacity={0.2}>
+                      <Phone className="w-5 h-5 text-[#00FFD1]" />
+                    </GlassBox>
+                    <div>
+                      <h4 className="text-white font-medium mb-1">Phone</h4>
+                      <div className="space-y-1">
+                        <a 
+                          href={`tel:${contactData.phone.canada.replace(/\D/g, '')}`}
+                          className="block text-white/70 hover:text-[#00FFD1] transition-colors duration-300"
+                        >
+                          {contactData.phone.canada}
+                        </a>
+                        <p className="text-white/50 text-sm">{contactData.phone.bangladesh}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <GlassBox className="w-12 h-12 rounded-none flex items-center justify-center flex-shrink-0" opacity={0.2}>
+                      <MapPin className="w-5 h-5 text-[#00FFD1]" />
+                    </GlassBox>
+                    <div>
+                      <h4 className="text-white font-medium mb-1">Offices</h4>
+                      <div className="space-y-2">
+                        <p className="text-white/70 text-sm leading-relaxed">
+                          <strong>Canada:</strong><br />
+                          {contactData.address.canada}
+                        </p>
+                        <p className="text-white/50 text-sm leading-relaxed">
+                          <strong>Bangladesh:</strong><br />
+                          {contactData.address.bangladesh}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </GlassBox>
 
               {/* Business Hours */}
-              <GlassBox className="p-6">
-                <div className="flex items-start space-x-4">
-                  <Clock className="w-6 h-6 text-[#00FFD1] mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="text-lg font-semibold text-white mb-2">Business Hours</h4>
-                    <p className="text-white/70">{contactData.hours}</p>
-                  </div>
-                </div>
+              <GlassBox 
+                className="p-8"
+                blur={16}
+                opacity={0.1}
+              >
+                <h3 className="text-xl font-bold text-white mb-4">Business Hours</h3>
+                <p className="text-white/70">
+                  {contactData.hours}
+                </p>
+                <p className="text-white/50 text-sm mt-2">
+                  We typically respond to all inquiries within 24 hours during business days.
+                </p>
+              </GlassBox>
+
+              {/* Why Choose Us */}
+              <GlassBox 
+                className="p-8"
+                blur={16}
+                opacity={0.1}
+              >
+                <h3 className="text-xl font-bold text-white mb-4">Why Choose Lead G?</h3>
+                <ul className="space-y-3 text-white/70">
+                  <li className="flex items-center space-x-2">
+                    <CheckCircle className="w-4 h-4 text-[#00FFD1] flex-shrink-0" />
+                    <span>8+ years of industry experience</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <CheckCircle className="w-4 h-4 text-[#00FFD1] flex-shrink-0" />
+                    <span>500+ successful client partnerships</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <CheckCircle className="w-4 h-4 text-[#00FFD1] flex-shrink-0" />
+                    <span>$50M+ in revenue generated</span>
+                  </li>
+                  <li className="flex items-center space-x-2">
+                    <CheckCircle className="w-4 h-4 text-[#00FFD1] flex-shrink-0" />
+                    <span>Dedicated account management</span>
+                  </li>
+                </ul>
               </GlassBox>
             </div>
           </ScrollReveal>
-
-          {/* Contact Form */}
-          <ScrollReveal delay={0.4}>
-            <GlassBox className="p-8">
-              <h3 className="text-3xl font-bold text-white mb-8">Send us a Message</h3>
-              
-              {isSubmitted ? (
-                <div className="text-center py-12">
-                  <CheckCircle className="w-16 h-16 text-[#00FFD1] mx-auto mb-4" />
-                  <h4 className="text-2xl font-bold text-white mb-2">Message Sent!</h4>
-                  <p className="text-white/70">We'll get back to you within 24 hours.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {contactFormFields.slice(0, 2).map((field) => (
-                      <div key={field.name}>
-                        <label className="block text-white/80 font-medium mb-2">
-                          {field.label} {field.required && <span className="text-[#00FFD1]">*</span>}
-                        </label>
-                        <input
-                          type={field.type}
-                          name={field.name}
-                          value={formData[field.name] || ''}
-                          onChange={handleInputChange}
-                          required={field.required}
-                          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-[#00FFD1] focus:bg-white/20 transition-all duration-300"
-                          placeholder={field.label}
-                        />
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {contactFormFields.slice(2, 4).map((field) => (
-                      <div key={field.name}>
-                        <label className="block text-white/80 font-medium mb-2">
-                          {field.label} {field.required && <span className="text-[#00FFD1]">*</span>}
-                        </label>
-                        <input
-                          type={field.type}
-                          name={field.name}
-                          value={formData[field.name] || ''}
-                          onChange={handleInputChange}
-                          required={field.required}
-                          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-[#00FFD1] focus:bg-white/20 transition-all duration-300"
-                          placeholder={field.label}
-                        />
-                      </div>
-                    ))}
-                  </div>
-
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">
-                      Company Name <span className="text-[#00FFD1]">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="company"
-                      value={formData.company || ''}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-[#00FFD1] focus:bg-white/20 transition-all duration-300"
-                      placeholder="Company Name"
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-white/80 font-medium mb-2">
-                        Industry <span className="text-[#00FFD1]">*</span>
-                      </label>
-                      <select
-                        name="industry"
-                        value={formData.industry || ''}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-[#00FFD1] focus:bg-white/20 transition-all duration-300"
-                      >
-                        <option value="">Select Industry</option>
-                        {contactFormFields[5].options.map((option) => (
-                          <option key={option} value={option} className="bg-[#1A1B3E] text-white">
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-white/80 font-medium mb-2">
-                        Service Interested In <span className="text-[#00FFD1]">*</span>
-                      </label>
-                      <select
-                        name="service"
-                        value={formData.service || ''}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-[#00FFD1] focus:bg-white/20 transition-all duration-300"
-                      >
-                        <option value="">Select Service</option>
-                        {contactFormFields[6].options.map((option) => (
-                          <option key={option} value={option} className="bg-[#1A1B3E] text-white">
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-white/80 font-medium mb-2">
-                      Message <span className="text-[#00FFD1]">*</span>
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message || ''}
-                      onChange={handleInputChange}
-                      required
-                      rows={5}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-[#00FFD1] focus:bg-white/20 transition-all duration-300 resize-none"
-                      placeholder="Tell us about your lead generation goals..."
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-[#00FFD1] text-black font-medium py-4 px-8 rounded-lg hover:bg-[#00FFD1]/90 transition-all duration-300 flex items-center justify-center space-x-2 disabled:opacity-50"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
-                        <span>Sending...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5" />
-                        <span>Send Message</span>
-                      </>
-                    )}
-                  </Button>
-                </form>
-              )}
-            </GlassBox>
-          </ScrollReveal>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

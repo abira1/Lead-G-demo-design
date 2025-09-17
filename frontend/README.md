@@ -1,70 +1,259 @@
-# Getting Started with Create React App
+# Lead G Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Modern React frontend for the Lead G lead generation platform with glass morphism design and responsive layout.
 
-## Available Scripts
+## 🚀 Quick Start
 
-In the project directory, you can run:
+### Prerequisites
+- Node.js 16+
+- Yarn package manager
 
-### `npm start`
+### Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Install dependencies:**
+   ```bash
+   yarn install
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. **Environment setup:**
+   ```bash
+   cp .env.example .env
+   # Edit .env if needed - defaults should work for local development
+   ```
 
-### `npm test`
+3. **Start development server:**
+   ```bash
+   yarn start
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The application will be available at http://localhost:3000
 
-### `npm run build`
+## 📚 Available Scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+yarn start    # Start development server
+yarn build    # Build for production
+yarn test     # Run tests
+yarn lint     # Check code quality
+yarn lint:fix # Fix linting issues
+yarn format   # Format code with Prettier
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🏗️ Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+frontend/
+├── public/                 # Static files
+├── src/
+│   ├── components/        # React components
+│   │   ├── ui/           # Reusable UI components
+│   │   ├── About.jsx     # About page
+│   │   ├── Contact.jsx   # Contact form
+│   │   ├── Footer.jsx    # Footer component
+│   │   ├── Header.jsx    # Navigation header
+│   │   └── ...
+│   ├── data/             # Mock data and constants
+│   ├── App.js            # Main application
+│   ├── index.js          # Entry point
+│   └── index.css         # Global styles
+├── package.json          # Dependencies and scripts
+├── tailwind.config.js    # Tailwind CSS configuration
+└── craco.config.js       # Create React App configuration
+```
 
-### `npm run eject`
+## 🎨 Design System
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Glass Morphism
+The app features a modern glass morphism design with:
+- Backdrop blur effects
+- Semi-transparent backgrounds
+- Subtle shadows and borders
+- Smooth animations
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Components
+- **GlassBox**: Reusable glass effect container
+- **ScrollReveal**: Animated scroll-triggered reveals
+- **Responsive Design**: Mobile-first approach
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Color Palette
+- Primary: `#00FFD1` (Cyan)
+- Background: Black/Dark gradients
+- Glass: White with low opacity
+- Text: White with varying opacity
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🛠️ Tech Stack
 
-## Learn More
+### Core
+- **React 18** - Modern React with hooks
+- **React Router 6** - Client-side routing
+- **Axios** - HTTP client for API calls
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### UI/UX
+- **Tailwind CSS** - Utility-first CSS framework
+- **Framer Motion** - Animation library
+- **Radix UI** - Accessible component primitives
+- **Lucide React** - Icon library
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Forms
+- **React Hook Form** - Form handling
+- **Zod** - Schema validation
 
-### Code Splitting
+### Build Tools
+- **Create React App** - Build toolchain
+- **CRACO** - CRA configuration override
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🔧 Configuration
 
-### Analyzing the Bundle Size
+### Environment Variables (.env)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```env
+# Backend API URL
+REACT_APP_BACKEND_URL=http://localhost:8001
 
-### Making a Progressive Web App
+# Environment
+REACT_APP_ENVIRONMENT=development
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Tailwind Configuration
 
-### Advanced Configuration
+Custom Tailwind configuration includes:
+- Glass morphism utilities
+- Custom animations
+- Extended color palette
+- Responsive breakpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📱 Responsive Design
 
-### Deployment
+The application is fully responsive with breakpoints:
+- `sm`: 640px (Mobile)
+- `md`: 768px (Tablet)
+- `lg`: 1024px (Desktop)
+- `xl`: 1280px (Large Desktop)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🧪 Testing
 
-### `npm run build` fails to minify
+```bash
+# Run tests
+yarn test
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Run tests with coverage
+yarn test --coverage
+
+# Run tests in watch mode
+yarn test --watch
+```
+
+## 🚀 Production Build
+
+```bash
+# Create production build
+yarn build
+
+# Serve locally to test
+npx serve -s build
+```
+
+### Build Optimization
+- Code splitting
+- Tree shaking
+- Asset optimization
+- PWA ready
+
+## 🔍 Key Features
+
+### Navigation
+- Responsive header with glass effect
+- Dropdown menus for Services and Industries
+- Mobile-friendly hamburger menu
+- Portal-based dropdowns for proper z-index
+
+### Pages
+- **Home**: Hero section with animated metrics
+- **About**: Company information and values
+- **Contact**: Advanced contact form with validation
+- **Privacy Policy**: Legal compliance
+- **Terms of Service**: Service terms
+
+### Components
+- **Header**: Navigation with dropdowns
+- **Footer**: Company info and links
+- **GlassBox**: Reusable glass morphism container
+- **ScrollReveal**: Animated scroll reveals
+- **Contact Form**: Validated contact submission
+
+## 📊 Performance
+
+### Optimization Techniques
+- Component lazy loading
+- Image optimization
+- CSS purging with Tailwind
+- Bundle splitting
+- Service worker caching
+
+### Core Web Vitals
+- First Contentful Paint (FCP)
+- Largest Contentful Paint (LCP)
+- First Input Delay (FID)
+- Cumulative Layout Shift (CLS)
+
+## 🛠️ Development
+
+### Code Style
+- ESLint configuration for React
+- Prettier for consistent formatting
+- Component naming conventions
+- File organization standards
+
+### Best Practices
+- Functional components with hooks
+- Custom hooks for reusable logic
+- Proper error boundaries
+- Accessibility compliance
+- SEO optimization
+
+## 🤝 Contributing
+
+1. Follow the established code style
+2. Use functional components and hooks
+3. Include PropTypes or TypeScript types
+4. Write tests for new components
+5. Update documentation
+
+## 🆘 Troubleshooting
+
+### Common Issues
+
+**Build Failures:**
+```bash
+# Clear cache and reinstall
+rm -rf node_modules yarn.lock
+yarn install
+```
+
+**API Connection Issues:**
+```
+Check REACT_APP_BACKEND_URL in .env
+Ensure backend server is running on correct port
+Verify CORS configuration in backend
+```
+
+**Styling Issues:**
+```
+Run Tailwind rebuild: yarn build
+Check component class names
+Verify Tailwind configuration
+```
+
+**Performance Issues:**
+```
+Use React DevTools Profiler
+Check for unnecessary re-renders
+Optimize large lists with virtualization
+Lazy load heavy components
+```
+
+---
+
+For more information, visit the [main project README](../README.md).
