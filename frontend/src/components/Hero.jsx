@@ -7,7 +7,7 @@ import LiquidEther from './LiquidEther';
 import ScrollReveal from './ScrollReveal';
 import GlassBox from './GlassBox';
 import { ShinyCard } from './ui/shiny-card';
-import VariableProximity from './VariableProximity';
+// import VariableProximity from './VariableProximity'; // Removed for compatibility
 
 const Hero = () => {
   const containerRef = useRef(null);
