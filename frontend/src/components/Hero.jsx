@@ -63,21 +63,8 @@ const Hero = () => {
           {/* Main Headline with Variable Proximity Effect */}
           <div className="mb-8">
             <ScrollReveal delay={0.2}>
-              <h1 className="text-4xl lg:text-6xl font-bold leading-[0.9] tracking-tight">
-                <VariableProximity
-                  label="Turn conversations into customers"
-                  className="variable-proximity-hero text-white"
-                  fromFontVariationSettings="'wght' 400, 'opsz' 9"
-                  toFontVariationSettings="'wght' 900, 'opsz' 40"
-                  containerRef={containerRef}
-                  radius={120}
-                  falloff="exponential"
-                  style={{ 
-                    display: 'block',
-                    lineHeight: '0.9',
-                    letterSpacing: '-0.025em'
-                  }}
-                />
+              <h1 className="text-4xl lg:text-6xl font-bold leading-[0.9] tracking-tight text-white">
+                Turn conversations into customers
               </h1>
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
