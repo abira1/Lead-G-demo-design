@@ -608,6 +608,29 @@ class BackendTester:
         # Test data persistence
         self.test_data_persistence()
         
+        print("\n" + "=" * 60)
+        print("🗓️  APPOINTMENT BOOKING SYSTEM TESTS")
+        print("=" * 60)
+        
+        # Test appointment creation
+        self.test_create_appointment_valid()
+        self.test_create_appointment_overlap_prevention()
+        self.test_create_appointment_validation()
+        
+        # Test appointment retrieval
+        self.test_get_appointments()
+        self.test_get_appointments_with_status_filter()
+        self.test_get_appointments_with_limit()
+        
+        # Test appointment status updates
+        self.test_update_appointment_status_valid()
+        self.test_update_appointment_status_invalid_id()
+        self.test_update_appointment_status_invalid_status()
+        
+        # Test availability checking
+        self.test_check_availability_date_only()
+        self.test_check_availability_date_and_time()
+        
         # Print summary
         print("\n" + "=" * 60)
         print("📊 TEST SUMMARY")
@@ -626,6 +649,8 @@ class BackendTester:
             print("\n❌ FAILED TESTS:")
             for test in self.failed_tests:
                 print(f"  - {test['test']}: {test['message']}")
+        else:
+            print("\n🎉 All tests passed!")
         
         return len(self.failed_tests) == 0
 
