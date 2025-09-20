@@ -201,6 +201,393 @@ class BackendTester:
                 
         except requests.exceptions.RequestException as e:
             self.log_test("Data Persistence", False, f"Data persistence test failed: {str(e)}")
+
+    # ==================== APPOINTMENT BOOKING SYSTEM TESTS ====================
+    
+    def test_create_appointment_valid(self):
+        """Test POST /api/appointments with valid data"""
+        try:
+            test_data = {
+                "name": "Sarah Johnson",
+                "email": "sarah.johnson@businesscorp.com",
+                "phone": "+1-555-0123",
+                "business": "Business Corp",
+                "industry": "Technology",
+                "service_interests": "Lead Generation, Social Media Marketing",
+                "appointment_date": "2024-12-20",
+                "appointment_time": "14:30",
+                "message": "Looking to improve our lead generation process and social media presence."
+            }
+            
+            response = requests.post(
+                f"{API_BASE_URL}/appointments",
+                json=test_data,
+                headers={'Content-Type': 'application/json'},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                required_fields = ['id', 'name', 'email', 'phone', 'appointment_date', 'appointment_time', 'status', 'created_at']
+                
+                if all(field in data for field in required_fields):
+                    if (data['name'] == test_data['name'] and 
+                        data['email'] == test_data['email'] and
+                        data['appointment_date'] == test_data['appointment_date'] and
+                        data['appointment_time'] == test_data['appointment_time'] and
+                        data['status'] == 'pending'):
+                        self.log_test("Create Appointment - Valid Data", True, "Appointment created successfully with all required fields")
+                        return data  # Return for overlap testing
+                    else:
+                        self.log_test("Create Appointment - Valid Data", False, "Data mismatch in created appointment", data)
+                else:
+                    missing_fields = [field for field in required_fields if field not in data]
+                    self.log_test("Create Appointment - Valid Data", False, f"Missing required fields: {missing_fields}", data)
+            else:
+                self.log_test("Create Appointment - Valid Data", False, f"HTTP {response.status_code}: {response.text}", response.text)
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Create Appointment - Valid Data", False, f"Request failed: {str(e)}")
+        
+        return None
+
+    def test_create_appointment_overlap_prevention(self):
+        """Test appointment overlap prevention (409 Conflict)"""
+        try:
+            # First appointment
+            test_data_1 = {
+                "name": "Michael Chen",
+                "email": "michael.chen@techstartup.com",
+                "phone": "+1-555-0456",
+                "appointment_date": "2024-12-21",
+                "appointment_time": "09:00"
+            }
+            
+            # Create first appointment
+            response1 = requests.post(
+                f"{API_BASE_URL}/appointments",
+                json=test_data_1,
+                headers={'Content-Type': 'application/json'},
+                timeout=10
+            )
+            
+            if response1.status_code != 200:
+                self.log_test("Overlap Prevention", False, f"Failed to create first appointment: {response1.status_code}")
+                return
+            
+            # Try to create overlapping appointment
+            test_data_2 = {
+                "name": "Emma Rodriguez",
+                "email": "emma.rodriguez@consulting.com",
+                "phone": "+1-555-0789",
+                "appointment_date": "2024-12-21",  # Same date
+                "appointment_time": "09:00"        # Same time
+            }
+            
+            response2 = requests.post(
+                f"{API_BASE_URL}/appointments",
+                json=test_data_2,
+                headers={'Content-Type': 'application/json'},
+                timeout=10
+            )
+            
+            if response2.status_code == 409:
+                error_data = response2.json()
+                if "already booked" in error_data.get('detail', '').lower():
+                    self.log_test("Overlap Prevention", True, "Correctly prevented overlapping appointment with 409 Conflict")
+                else:
+                    self.log_test("Overlap Prevention", False, f"Wrong error message: {error_data.get('detail')}", error_data)
+            else:
+                self.log_test("Overlap Prevention", False, f"Expected 409 Conflict, got {response2.status_code}: {response2.text}")
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Overlap Prevention", False, f"Request failed: {str(e)}")
+
+    def test_create_appointment_validation(self):
+        """Test appointment validation with invalid data"""
+        try:
+            # Test missing required fields
+            invalid_data = {
+                "name": "Test User",
+                # Missing email, phone, appointment_date, appointment_time
+            }
+            
+            response = requests.post(
+                f"{API_BASE_URL}/appointments",
+                json=invalid_data,
+                headers={'Content-Type': 'application/json'},
+                timeout=10
+            )
+            
+            if response.status_code == 422:  # Validation error
+                self.log_test("Appointment Validation - Missing Fields", True, "Correctly rejected appointment with missing required fields")
+            else:
+                self.log_test("Appointment Validation - Missing Fields", False, f"Expected 422 validation error, got {response.status_code}")
+            
+            # Test invalid email format
+            invalid_email_data = {
+                "name": "Test User",
+                "email": "invalid-email-format",
+                "phone": "+1-555-0123",
+                "appointment_date": "2024-12-22",
+                "appointment_time": "10:00"
+            }
+            
+            response2 = requests.post(
+                f"{API_BASE_URL}/appointments",
+                json=invalid_email_data,
+                headers={'Content-Type': 'application/json'},
+                timeout=10
+            )
+            
+            if response2.status_code == 422:
+                self.log_test("Appointment Validation - Invalid Email", True, "Correctly rejected appointment with invalid email format")
+            else:
+                self.log_test("Appointment Validation - Invalid Email", False, f"Expected 422 validation error, got {response2.status_code}")
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Appointment Validation", False, f"Request failed: {str(e)}")
+
+    def test_get_appointments(self):
+        """Test GET /api/appointments endpoint"""
+        try:
+            response = requests.get(f"{API_BASE_URL}/appointments", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                if isinstance(data, list):
+                    self.log_test("Get Appointments", True, f"Retrieved {len(data)} appointments")
+                    
+                    # Validate structure if appointments exist
+                    if data:
+                        first_appointment = data[0]
+                        required_fields = ['id', 'name', 'email', 'phone', 'appointment_date', 'appointment_time', 'status', 'created_at']
+                        if all(field in first_appointment for field in required_fields):
+                            self.log_test("Appointment Structure", True, "Appointment items have correct structure")
+                        else:
+                            missing_fields = [field for field in required_fields if field not in first_appointment]
+                            self.log_test("Appointment Structure", False, f"Appointment items missing fields: {missing_fields}", first_appointment)
+                    
+                    return data
+                else:
+                    self.log_test("Get Appointments", False, f"Expected list, got {type(data)}", data)
+            else:
+                self.log_test("Get Appointments", False, f"HTTP {response.status_code}: {response.text}", response.text)
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Get Appointments", False, f"Request failed: {str(e)}")
+        
+        return None
+
+    def test_get_appointments_with_status_filter(self):
+        """Test GET /api/appointments with status filter"""
+        try:
+            # Test filtering by pending status
+            response = requests.get(f"{API_BASE_URL}/appointments?status_filter=pending", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if isinstance(data, list):
+                    self.log_test("Get Appointments - Status Filter", True, f"Retrieved {len(data)} pending appointments")
+                else:
+                    self.log_test("Get Appointments - Status Filter", False, f"Expected list, got {type(data)}", data)
+            else:
+                self.log_test("Get Appointments - Status Filter", False, f"HTTP {response.status_code}: {response.text}")
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Get Appointments - Status Filter", False, f"Request failed: {str(e)}")
+
+    def test_get_appointments_with_limit(self):
+        """Test GET /api/appointments with limit parameter"""
+        try:
+            response = requests.get(f"{API_BASE_URL}/appointments?limit=5", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if isinstance(data, list):
+                    self.log_test("Get Appointments - Limit", True, f"Retrieved {len(data)} appointments with limit parameter")
+                else:
+                    self.log_test("Get Appointments - Limit", False, f"Expected list, got {type(data)}", data)
+            else:
+                self.log_test("Get Appointments - Limit", False, f"HTTP {response.status_code}: {response.text}")
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Get Appointments - Limit", False, f"Request failed: {str(e)}")
+
+    def test_update_appointment_status_valid(self):
+        """Test PUT /api/appointments/{id}/status with valid data"""
+        try:
+            # First create an appointment to update
+            test_data = {
+                "name": "David Wilson",
+                "email": "david.wilson@enterprise.com",
+                "phone": "+1-555-0321",
+                "appointment_date": "2024-12-23",
+                "appointment_time": "11:00"
+            }
+            
+            create_response = requests.post(
+                f"{API_BASE_URL}/appointments",
+                json=test_data,
+                headers={'Content-Type': 'application/json'},
+                timeout=10
+            )
+            
+            if create_response.status_code != 200:
+                self.log_test("Update Appointment Status", False, f"Failed to create test appointment: {create_response.status_code}")
+                return
+            
+            created_appointment = create_response.json()
+            appointment_id = created_appointment['id']
+            
+            # Update the status
+            status_update = {"status": "confirmed"}
+            
+            response = requests.put(
+                f"{API_BASE_URL}/appointments/{appointment_id}/status",
+                json=status_update,
+                headers={'Content-Type': 'application/json'},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                if data.get('success') and "updated successfully" in data.get('message', '').lower():
+                    self.log_test("Update Appointment Status - Valid", True, "Successfully updated appointment status to confirmed")
+                else:
+                    self.log_test("Update Appointment Status - Valid", False, f"Unexpected response: {data}", data)
+            else:
+                self.log_test("Update Appointment Status - Valid", False, f"HTTP {response.status_code}: {response.text}")
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Update Appointment Status - Valid", False, f"Request failed: {str(e)}")
+
+    def test_update_appointment_status_invalid_id(self):
+        """Test PUT /api/appointments/{id}/status with invalid appointment ID"""
+        try:
+            fake_id = "non-existent-appointment-id"
+            status_update = {"status": "confirmed"}
+            
+            response = requests.put(
+                f"{API_BASE_URL}/appointments/{fake_id}/status",
+                json=status_update,
+                headers={'Content-Type': 'application/json'},
+                timeout=10
+            )
+            
+            if response.status_code == 404:
+                error_data = response.json()
+                if "not found" in error_data.get('detail', '').lower():
+                    self.log_test("Update Appointment Status - Invalid ID", True, "Correctly returned 404 for non-existent appointment")
+                else:
+                    self.log_test("Update Appointment Status - Invalid ID", False, f"Wrong error message: {error_data.get('detail')}")
+            else:
+                self.log_test("Update Appointment Status - Invalid ID", False, f"Expected 404 Not Found, got {response.status_code}")
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Update Appointment Status - Invalid ID", False, f"Request failed: {str(e)}")
+
+    def test_update_appointment_status_invalid_status(self):
+        """Test PUT /api/appointments/{id}/status with invalid status value"""
+        try:
+            # First create an appointment to update
+            test_data = {
+                "name": "Lisa Thompson",
+                "email": "lisa.thompson@company.com",
+                "phone": "+1-555-0654",
+                "appointment_date": "2024-12-24",
+                "appointment_time": "15:30"
+            }
+            
+            create_response = requests.post(
+                f"{API_BASE_URL}/appointments",
+                json=test_data,
+                headers={'Content-Type': 'application/json'},
+                timeout=10
+            )
+            
+            if create_response.status_code != 200:
+                self.log_test("Update Appointment Status - Invalid Status", False, f"Failed to create test appointment: {create_response.status_code}")
+                return
+            
+            created_appointment = create_response.json()
+            appointment_id = created_appointment['id']
+            
+            # Try to update with invalid status
+            invalid_status_update = {"status": "invalid_status"}
+            
+            response = requests.put(
+                f"{API_BASE_URL}/appointments/{appointment_id}/status",
+                json=invalid_status_update,
+                headers={'Content-Type': 'application/json'},
+                timeout=10
+            )
+            
+            if response.status_code == 400:
+                error_data = response.json()
+                if "invalid status" in error_data.get('detail', '').lower():
+                    self.log_test("Update Appointment Status - Invalid Status", True, "Correctly rejected invalid status value with 400 Bad Request")
+                else:
+                    self.log_test("Update Appointment Status - Invalid Status", False, f"Wrong error message: {error_data.get('detail')}")
+            else:
+                self.log_test("Update Appointment Status - Invalid Status", False, f"Expected 400 Bad Request, got {response.status_code}")
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Update Appointment Status - Invalid Status", False, f"Request failed: {str(e)}")
+
+    def test_check_availability_date_only(self):
+        """Test GET /api/appointments/availability for a specific date"""
+        try:
+            test_date = "2024-12-25"
+            response = requests.get(f"{API_BASE_URL}/appointments/availability?date={test_date}", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                required_fields = ['date', 'booked_times', 'message']
+                
+                if all(field in data for field in required_fields):
+                    if (data['date'] == test_date and 
+                        isinstance(data['booked_times'], list)):
+                        self.log_test("Check Availability - Date Only", True, f"Successfully checked availability for {test_date}, found {len(data['booked_times'])} booked times")
+                    else:
+                        self.log_test("Check Availability - Date Only", False, f"Invalid response structure: {data}", data)
+                else:
+                    missing_fields = [field for field in required_fields if field not in data]
+                    self.log_test("Check Availability - Date Only", False, f"Missing required fields: {missing_fields}", data)
+            else:
+                self.log_test("Check Availability - Date Only", False, f"HTTP {response.status_code}: {response.text}")
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Check Availability - Date Only", False, f"Request failed: {str(e)}")
+
+    def test_check_availability_date_and_time(self):
+        """Test GET /api/appointments/availability for a specific date and time"""
+        try:
+            test_date = "2024-12-26"
+            test_time = "16:00"
+            response = requests.get(f"{API_BASE_URL}/appointments/availability?date={test_date}&time={test_time}", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                required_fields = ['available', 'date', 'time', 'message']
+                
+                if all(field in data for field in required_fields):
+                    if (data['date'] == test_date and 
+                        data['time'] == test_time and
+                        isinstance(data['available'], bool)):
+                        availability_status = "available" if data['available'] else "not available"
+                        self.log_test("Check Availability - Date and Time", True, f"Successfully checked availability for {test_date} at {test_time}: {availability_status}")
+                    else:
+                        self.log_test("Check Availability - Date and Time", False, f"Invalid response structure: {data}", data)
+                else:
+                    missing_fields = [field for field in required_fields if field not in data]
+                    self.log_test("Check Availability - Date and Time", False, f"Missing required fields: {missing_fields}", data)
+            else:
+                self.log_test("Check Availability - Date and Time", False, f"HTTP {response.status_code}: {response.text}")
+                
+        except requests.exceptions.RequestException as e:
+            self.log_test("Check Availability - Date and Time", False, f"Request failed: {str(e)}")
     
     def run_all_tests(self):
         """Run all backend tests"""
