@@ -43,16 +43,18 @@ class BackendTester:
                 print(f"   Response: {response_data}")
     
     def test_root_endpoint(self):
-        """Test GET /api/ endpoint"""
+        """Test GET / endpoint (root health check)"""
         try:
-            response = requests.get(f"{API_BASE_URL}/", timeout=10)
+            response = requests.get(f"{BACKEND_URL}/", timeout=10)
             
             if response.status_code == 200:
                 data = response.json()
-                if data.get('message') == 'Hello World':
-                    self.log_test("Root Endpoint", True, "Root endpoint returned correct message")
+                if (data.get('success') == True and 
+                    'Lead G API is running successfully' in data.get('message', '') and
+                    'version' in data.get('data', {})):
+                    self.log_test("Root Endpoint", True, "Root endpoint returned correct API health response")
                 else:
-                    self.log_test("Root Endpoint", False, f"Unexpected response: {data}", data)
+                    self.log_test("Root Endpoint", False, f"Unexpected response structure: {data}", data)
             else:
                 self.log_test("Root Endpoint", False, f"HTTP {response.status_code}: {response.text}", response.text)
                 
