@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { heroData } from '../data/mock';
 import { Button } from './ui/button';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight, Phone, Calendar } from 'lucide-react';
 import LiquidEther from './LiquidEther';
 import ScrollReveal from './ScrollReveal';
 import GlassBox from './GlassBox';
@@ -20,6 +20,11 @@ const Hero = () => {
     } else {
       window.location.href = '/contact';
     }
+  };
+
+  const handleBookAppointment = () => {
+    // Navigate to appointment booking page
+    window.location.href = '/book-appointment';
   };
 
   const handleSeePricing = () => {
