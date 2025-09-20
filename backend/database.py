@@ -153,5 +153,13 @@ class FirebaseDB:
         """Get a Firestore collection reference"""
         return self.db.collection(collection_name)
 
-# Global database instance
-firebase_db = FirebaseDB()
+# Global database instance - lazy initialization
+firebase_db = None
+
+def get_firebase_db():
+    """Get or create the Firebase database instance"""
+    global firebase_db
+    if firebase_db is None:
+        firebase_db = FirebaseDB()
+        firebase_db._initialize()
+    return firebase_db
