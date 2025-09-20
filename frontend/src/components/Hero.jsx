@@ -106,13 +106,6 @@ const Hero = () => {
                 <Phone className="w-5 h-5" />
                 <span>Book Free Call</span>
               </Button>
-              
-              <Button 
-                onClick={handleSeePricing}
-                className="bg-white/5 text-white border-none rounded-none px-8 py-4 text-lg font-medium hover:bg-white/10 hover:scale-105 transition-all duration-300 min-h-[56px] flex items-center space-x-3 cursor-pointer"
-              >
-                <span>See Pricing</span>
-              </Button>
             </div>
           </ScrollReveal>
 
