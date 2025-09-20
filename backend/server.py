@@ -173,6 +173,143 @@ async def get_contact_forms(limit: int = 100, status_filter: str = None):
             detail="Failed to retrieve contact forms"
         )
 
+# Appointment Endpoints
+@app.post(f"{settings.API_V1_STR}/appointments", response_model=Appointment)
+async def create_appointment(appointment_data: AppointmentCreate):
+    """Create a new appointment with overlap checking"""
+    try:
+        # Check for overlapping appointments
+        appointment_datetime = f"{appointment_data.appointment_date} {appointment_data.appointment_time}"
+        
+        # Query existing appointments for the same date and time
+        existing_appointments = firebase_db.get_collection('appointments')\
+            .where('appointment_date', '==', appointment_data.appointment_date)\
+            .where('appointment_time', '==', appointment_data.appointment_time)\
+            .where('status', 'in', ['pending', 'confirmed'])\
+            .get()
+        
+        if len(existing_appointments) > 0:
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail="This appointment slot is already booked. Please select a different time."
+            )
+        
+        appointment = Appointment(**appointment_data.dict())
+        
+        # Save to Firebase
+        doc_ref = firebase_db.get_collection('appointments').document(appointment.id)
+        doc_ref.set(appointment.dict())
+        
+        logger.info(f"Created appointment: {appointment.id} for {appointment.email} on {appointment.appointment_date} at {appointment.appointment_time}")
+        return appointment
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to create appointment: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to create appointment"
+        )
+
+@app.get(f"{settings.API_V1_STR}/appointments", response_model=List[Appointment])
+async def get_appointments(limit: int = 100, status_filter: str = None):
+    """Retrieve appointments (admin endpoint)"""
+    try:
+        query = firebase_db.get_collection('appointments').order_by('created_at', direction='DESCENDING')
+        
+        if status_filter:
+            query = query.where('status', '==', status_filter)
+            
+        docs = query.limit(limit).get()
+        
+        appointments = []
+        for doc in docs:
+            data = doc.to_dict()
+            appointments.append(Appointment(**data))
+        
+        logger.info(f"Retrieved {len(appointments)} appointments")
+        return appointments
+        
+    except Exception as e:
+        logger.error(f"Failed to retrieve appointments: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to retrieve appointments"
+        )
+
+@app.put(f"{settings.API_V1_STR}/appointments/{{appointment_id}}/status")
+async def update_appointment_status(appointment_id: str, status_update: dict):
+    """Update appointment status (admin endpoint)"""
+    try:
+        new_status = status_update.get('status')
+        if new_status not in ['pending', 'confirmed', 'completed', 'cancelled']:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Invalid status. Must be one of: pending, confirmed, completed, cancelled"
+            )
+        
+        doc_ref = firebase_db.get_collection('appointments').document(appointment_id)
+        doc = doc_ref.get()
+        
+        if not doc.exists:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Appointment not found"
+            )
+        
+        doc_ref.update({'status': new_status})
+        
+        logger.info(f"Updated appointment {appointment_id} status to {new_status}")
+        return {"success": True, "message": "Appointment status updated successfully"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to update appointment status: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to update appointment status"
+        )
+
+@app.get(f"{settings.API_V1_STR}/appointments/availability")
+async def check_availability(date: str, time: str = None):
+    """Check appointment availability for a specific date or date/time"""
+    try:
+        query = firebase_db.get_collection('appointments')\
+            .where('appointment_date', '==', date)\
+            .where('status', 'in', ['pending', 'confirmed'])
+        
+        if time:
+            query = query.where('appointment_time', '==', time)
+        
+        docs = query.get()
+        
+        if time:
+            # Check specific time slot
+            is_available = len(docs) == 0
+            return {
+                "available": is_available,
+                "date": date,
+                "time": time,
+                "message": "Time slot is available" if is_available else "Time slot is already booked"
+            }
+        else:
+            # Return booked times for the date
+            booked_times = [doc.to_dict()['appointment_time'] for doc in docs]
+            return {
+                "date": date,
+                "booked_times": booked_times,
+                "message": f"Found {len(booked_times)} booked appointments for this date"
+            }
+        
+    except Exception as e:
+        logger.error(f"Failed to check availability: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to check availability"
+        )
+
 # Exception handlers
 @app.exception_handler(404)
 async def not_found_handler(request, exc):
