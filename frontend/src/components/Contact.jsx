@@ -249,6 +249,41 @@ const Contact = () => {
                   </li>
                 </ul>
               </GlassBox>
+              
+              {/* Quick Actions */}
+              <GlassBox 
+                className="p-8"
+                blur={16}
+                opacity={0.1}
+              >
+                <h3 className="text-xl font-bold text-white mb-6">Ready to Get Started?</h3>
+                
+                <div className="space-y-4">
+                  <a 
+                    href="/book-appointment"
+                    className="flex items-center justify-center space-x-3 bg-[#00FFD1] text-black px-6 py-4 hover:bg-[#00FFD1]/90 transition-all duration-300 rounded-none text-lg font-medium"
+                  >
+                    <CheckCircle className="w-5 h-5" />
+                    <span>Book Appointment</span>
+                  </a>
+                  
+                  <a 
+                    href={`mailto:${contactData.email}`}
+                    className="flex items-center justify-center space-x-3 bg-white/10 text-white px-6 py-4 hover:bg-white hover:text-black transition-all duration-300 rounded-none text-lg font-medium border border-white/20"
+                  >
+                    <Mail className="w-5 h-5" />
+                    <span>Send Email</span>
+                  </a>
+                  
+                  <a 
+                    href={`tel:${contactData.phone.canada.replace(/\D/g, '')}`}
+                    className="flex items-center justify-center space-x-3 bg-white/5 text-white px-6 py-4 hover:bg-white/10 transition-all duration-300 rounded-none text-lg font-medium border border-white/10"
+                  >
+                    <Phone className="w-5 h-5" />
+                    <span>Call Now</span>
+                  </a>
+                </div>
+              </GlassBox>
             </div>
           </ScrollReveal>
         </div>
