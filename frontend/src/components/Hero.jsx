@@ -26,14 +26,6 @@ const Hero = () => {
     // Navigate to appointment booking page
     window.location.href = '/book-appointment';
   };
-
-  const handleSeePricing = () => {
-    // Scroll to pricing section
-    const pricingSection = document.getElementById('pricing');
-    if (pricingSection) {
-      pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
   
   return (
     <section id="home" className="relative h-screen bg-black overflow-hidden flex items-center justify-center pt-20 lg:pt-0">
