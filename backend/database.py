@@ -1,13 +1,11 @@
 """
 Firebase Firestore database configuration and utilities
 """
-import firebase_admin
-from firebase_admin import credentials, firestore
-from config import settings
 import logging
 from typing import Optional, Dict, Any, List
 import uuid
 from datetime import datetime
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -104,62 +102,34 @@ class MockFirestore:
 class FirebaseDB:
     _instance: Optional['FirebaseDB'] = None
     _db = None
-    _initialized = False
     
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(FirebaseDB, cls).__new__(cls)
+            cls._instance._initialize()
         return cls._instance
     
     def _initialize(self):
-        """Initialize Firebase Admin SDK"""
-        if self._initialized:
-            return
-            
-        try:
-            if not firebase_admin._apps:
-                # For development without credentials, use project ID only
-                if settings.FIREBASE_PROJECT_ID:
-                    firebase_admin.initialize_app(options={
-                        'projectId': settings.FIREBASE_PROJECT_ID,
-                    })
-                else:
-                    # Fallback initialization
-                    firebase_admin.initialize_app()
-                
-                self._db = firestore.client()
-                logger.info("Firebase initialized successfully")
-            else:
-                self._db = firestore.client()
-                logger.info("Using existing Firebase app")
-            
-            self._initialized = True
-                
-        except Exception as e:
-            logger.error(f"Failed to initialize Firebase: {e}")
-            # For development, create a mock database interface
-            logger.warning("Using mock database for development")
+        """Initialize database - use mock for development"""
+        # For development, always use mock database
+        if os.getenv('ENVIRONMENT', 'development') == 'development':
+            logger.info("Using mock database for development")
             self._db = MockFirestore()
-            self._initialized = True
+        else:
+            # For production, you would initialize real Firebase here
+            logger.warning("Production Firebase not configured, using mock")
+            self._db = MockFirestore()
     
     @property
     def db(self):
-        """Get Firestore database instance"""
+        """Get database instance"""
         if self._db is None:
             self._initialize()
         return self._db
     
     def get_collection(self, collection_name: str):
-        """Get a Firestore collection reference"""
+        """Get a collection reference"""
         return self.db.collection(collection_name)
 
-# Global database instance - lazy initialization
-firebase_db = None
-
-def get_firebase_db():
-    """Get or create the Firebase database instance"""
-    global firebase_db
-    if firebase_db is None:
-        firebase_db = FirebaseDB()
-        firebase_db._initialize()
-    return firebase_db
+# Global database instance
+firebase_db = FirebaseDB()
