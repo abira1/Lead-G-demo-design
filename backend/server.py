@@ -15,6 +15,7 @@ from database import firebase_db
 from models import (
     StatusCheck, StatusCheckCreate,
     ContactForm, ContactFormCreate,
+    Appointment, AppointmentCreate,
     APIResponse
 )
 
