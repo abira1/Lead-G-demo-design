@@ -11,6 +11,8 @@ import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import AppointmentBooking from "./components/AppointmentBooking";
+import Admin from "./components/Admin";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 
