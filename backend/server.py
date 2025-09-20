@@ -238,7 +238,7 @@ async def get_appointments(limit: int = 100, status_filter: str = None):
             detail="Failed to retrieve appointments"
         )
 
-@app.put(f"{settings.API_V1_STR}/appointments/{{appointment_id}}/status")
+@app.put(settings.API_V1_STR + "/appointments/{appointment_id}/status")
 async def update_appointment_status(appointment_id: str, status_update: dict):
     """Update appointment status (admin endpoint)"""
     try:
