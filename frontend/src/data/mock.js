@@ -34,7 +34,8 @@ export const navigationData = {
     { name: "Pricing", href: "/#pricing" },
     { name: "Case Studies", href: "/#case-studies" },
     { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" }
+    { name: "Contact", href: "/contact" },
+    { name: "Book Appointment", href: "/book-appointment" }
   ]
 };
 
