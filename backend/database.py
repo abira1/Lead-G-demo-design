@@ -104,15 +104,18 @@ class MockFirestore:
 class FirebaseDB:
     _instance: Optional['FirebaseDB'] = None
     _db = None
+    _initialized = False
     
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(FirebaseDB, cls).__new__(cls)
-            cls._instance._initialize()
         return cls._instance
     
     def _initialize(self):
         """Initialize Firebase Admin SDK"""
+        if self._initialized:
+            return
+            
         try:
             if not firebase_admin._apps:
                 # For development without credentials, use project ID only
@@ -129,12 +132,15 @@ class FirebaseDB:
             else:
                 self._db = firestore.client()
                 logger.info("Using existing Firebase app")
+            
+            self._initialized = True
                 
         except Exception as e:
             logger.error(f"Failed to initialize Firebase: {e}")
             # For development, create a mock database interface
             logger.warning("Using mock database for development")
             self._db = MockFirestore()
+            self._initialized = True
     
     @property
     def db(self):
