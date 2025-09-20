@@ -4,6 +4,7 @@ import { contactData } from '../data/mock';
 import ScrollReveal from './ScrollReveal';
 import GlassBox from './GlassBox';
 
+const Contact = () => {
   return (
     <div className="min-h-screen bg-black pt-24 pb-16">
       <div className="container mx-auto px-6 lg:px-16">
